@@ -1,0 +1,142 @@
+$config = bless( {
+                 'layoutdir' => 'share/layout/',
+                 'body' => {
+                             'height' => 25,
+                           },
+                 'page' => {
+                             'header' => {
+                                           'number' => {
+                                                         'xpos' => '200',
+                                                         'align' => 'right',
+                                                         'ypos' => '6',
+                                                         'local' => 'Page: ',
+                                                         'font' => {
+                                                                     'face' => 'Arial-Bold',
+                                                                     'size' => '8'
+                                                                   }
+                                                       },
+                                           'text' => [
+                                                       {
+                                                         'xpos' => '5',
+                                                         'function' => '"Overview " . localtime()',
+                                                         'ypos' => '6'
+                                                       }
+                                                     ]
+                                         }
+                           },
+                 'columns' => [
+                                {
+                                  'width' => '25',
+                                  'name' => 'name'
+                                },
+                                {
+                                  'width' => '100',
+                                  'name' => 'description'
+                                },
+                                {
+                                  'width' => '25',
+                                  'name' => 'price'
+                                },
+                                {
+                                  'width' => '25',
+                                  'name' => 'weight'
+                                },
+                                {
+                                  'width' => '25',
+                                  'name' => 'quantity'
+                                },
+                                {
+                                  'width' => '25',
+                                  'name' => 'size'
+                                }
+                              ],
+                 'totals' => [
+                               {
+                                 'count' => 0,
+                                 'value' => undef,
+                                 'columns' => {
+                                                'quantity' => 0,
+                                                'price' => 0
+                                              },
+                                 'config' => [
+                                               {
+                                                 'width' => '25',
+                                                 'name' => 'name'
+                                               },
+                                               {
+                                                 'width' => '100',
+                                                 'name' => 'description'
+                                               },
+                                               {
+                                                 'width' => '25',
+                                                 'name' => 'price'
+                                               },
+                                               {
+                                                 'width' => '25',
+                                                 'name' => 'weight'
+                                               },
+                                               {
+                                                 'width' => '25',
+                                                 'name' => 'quantity'
+                                               },
+                                               {
+                                                 'width' => '25',
+                                                 'name' => 'size'
+                                               }
+                                             ],
+                                 'key' => 'product_group'
+                               }
+                             ]
+               }, 'Document::ReportWriter::Config' );
+$expected = 'HEADERS
+os28009                  Brush Set                                                                                           9.99                     1                        95                                                
+os28044                  Framing Hammer                                                                                      19.99                    2                        100                      10oz, 15oz, 20 oz        
+os28062                  Electricians Plier Set                                                                              24.99                    1                        88                       set                      
+os28064                  Mechanics Wrench Set                                                                                19.99                    2                        94                       standard, metric         
+os28065                  Mechanics Pliers                                                                                    18.99                    2                        100                      1/4", 1/2", 3/4", 1", 2", 3"
+os28072                  Deluxe Hand Saw                                                                                     17.99                    1                        100                      2\', 2.5\', 3\'             
+os28073                  Mini-Sledge                                                                                         24.99                    3                        0                        20oz, 30oz, 50oz         
+os28074                  Rubber Mallet                                                                                       24.99                    2                        95                       30oz                     
+os28075                  Modeling Hammer                                                                                     14.99                    2                        100                      8oz                      
+os28076                  Digger Hand Trencher                                                                                18.99                    1                        100                      3"                       
+os28080                  The Blade Hand Planer                                                                               19.99                    1                        84                       1", 1.5", 2"             
+os28108                  Hand Brush                                                                                          5.99                     1                        90                       3", 5", 10"              
+os28109                  Mini-Spade                                                                                          24.99                    2                        100                      4\'                       
+os28110                  Mighty Mouse Tin Snips                                                                              14.99                    1                        99                       3"                       
+os28111                  Hedge Shears                                                                                        19.99                    1                        99                       10"                      
+os28112                  Garden Shovel                                                                                       13.99                    2                        100                      7"                       
+os28113                  The Claw Hand Rake                                                                                  14.99                    1                        100                      small, large             
+310.83                   1544                     
+os28057a                 16 Penny Nails                                                                                      14.99                    1                        100                                               
+os28057b                 8 Penny Nails                                                                                       12.99                    1                        29                                                
+os28057c                 10 Penny Nails                                                                                      13.99                    1                        50                                                
+41.97                    179                      
+os28008                  Painters Ladder                                                                                     29.99                    3                        100                      6\'                       
+os28085                  Big A A-Frame Ladder                                                                                36.99                    3                        1                        6\', 12\'                  
+os29000                  3\' Step Ladder                                                                                      44.99                                             97                                                
+FOOTERS
+HEADERS
+111.97                   198                      
+os28066                  Big L Carpenters Square                                                                             14.99                    1                        100                      1\', 3\'                   
+os28082                  24" Level                                                                                           34.99                    1                        99                       24"                      
+os28084                  Tape Measure                                                                                        19.99                    1                        95                       10\', 16\', 24\', 36\'       
+os28086                  Folding Ruler                                                                                       12.99                    1                        100                      6\'                       
+82.96                    394                      
+gift_cert                Gift Certificate                                                                                    1.00                                              1                                                 
+1                        1                        
+os28004                  Ergo Roller                                                                                         21.99                    1                        93                       1\', 1.5\'                 
+os28005                  Trim Brush                                                                                          8.99                     1                        100                      1", 2", 3"               
+os28006                  Painters Brush Set                                                                                  29.99                    1                        90                       set                      
+os28007                  Disposable Brush Set                                                                                14.99                    1                        85                       set                      
+os28011                  Spackling Knife                                                                                     14.99                    1                        40                       2"                       
+os28081                  Steel Wool                                                                                          8.99                     1                        100                      fine, light, course      
+os28087                  Sanders Multi-Pac                                                                                   11.99                    1                        30                       set                      
+111.93                   538                      
+os28068a                 Breathe Right Face Mask                                                                             5.99                     1                        100                                               
+os28068b                 The Bug Eye Wear                                                                                    12.00                    1                        99                                                
+17.99                    199                      
+os28069                  Flat Top Toolbox                                                                                    44.99                    2                        100                      20"x 8.5" x 9"           
+os28070                  Electricians Tool Belt                                                                              39.99                    1                        0                                                 
+os28077                  Carpenter\'s Tool Belt                                                                               39.99                    1                        97                                                
+124.97                   197                      
+';

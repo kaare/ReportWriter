@@ -1,0 +1,434 @@
+$array = [
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 95,
+            'weight' => '1',
+            'name' => 'os28009',
+            'product_group' => 'Hand Tools',
+            'price' => '9.99',
+            'description' => 'Brush Set',
+            'size' => ''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '2',
+            'name' => 'os28044',
+            'product_group' => 'Hand Tools',
+            'price' => '19.99',
+            'description' => 'Framing Hammer',
+            'size' => '10oz, 15oz, 20 oz'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 88,
+            'weight' => '1',
+            'name' => 'os28062',
+            'product_group' => 'Hand Tools',
+            'price' => '24.99',
+            'description' => 'Electricians Plier Set',
+            'size' => 'set'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 94,
+            'weight' => '2',
+            'name' => 'os28064',
+            'product_group' => 'Hand Tools',
+            'price' => '19.99',
+            'description' => 'Mechanics Wrench Set',
+            'size' => 'standard, metric'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '2',
+            'name' => 'os28065',
+            'product_group' => 'Hand Tools',
+            'price' => '18.99',
+            'description' => 'Mechanics Pliers',
+            'size' => '1/4", 1/2", 3/4", 1", 2", 3"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28072',
+            'product_group' => 'Hand Tools',
+            'price' => '17.99',
+            'description' => 'Deluxe Hand Saw',
+            'size' => '2\', 2.5\', 3\''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 0,
+            'weight' => '3',
+            'name' => 'os28073',
+            'product_group' => 'Hand Tools',
+            'price' => '24.99',
+            'description' => 'Mini-Sledge',
+            'size' => '20oz, 30oz, 50oz'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 95,
+            'weight' => '2',
+            'name' => 'os28074',
+            'product_group' => 'Hand Tools',
+            'price' => '24.99',
+            'description' => 'Rubber Mallet',
+            'size' => '30oz'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '2',
+            'name' => 'os28075',
+            'product_group' => 'Hand Tools',
+            'price' => '14.99',
+            'description' => 'Modeling Hammer',
+            'size' => '8oz'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28076',
+            'product_group' => 'Hand Tools',
+            'price' => '18.99',
+            'description' => 'Digger Hand Trencher',
+            'size' => '3"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 84,
+            'weight' => '1',
+            'name' => 'os28080',
+            'product_group' => 'Hand Tools',
+            'price' => '19.99',
+            'description' => 'The Blade Hand Planer',
+            'size' => '1", 1.5", 2"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 90,
+            'weight' => '1',
+            'name' => 'os28108',
+            'product_group' => 'Hand Tools',
+            'price' => '5.99',
+            'description' => 'Hand Brush',
+            'size' => '3", 5", 10"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '2',
+            'name' => 'os28109',
+            'product_group' => 'Hand Tools',
+            'price' => '24.99',
+            'description' => 'Mini-Spade',
+            'size' => '4\''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 99,
+            'weight' => '1',
+            'name' => 'os28110',
+            'product_group' => 'Hand Tools',
+            'price' => '14.99',
+            'description' => 'Mighty Mouse Tin Snips',
+            'size' => '3"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 99,
+            'weight' => '1',
+            'name' => 'os28111',
+            'product_group' => 'Hand Tools',
+            'price' => '19.99',
+            'description' => 'Hedge Shears',
+            'size' => '10"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '2',
+            'name' => 'os28112',
+            'product_group' => 'Hand Tools',
+            'price' => '13.99',
+            'description' => 'Garden Shovel',
+            'size' => '7"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28113',
+            'product_group' => 'Hand Tools',
+            'price' => '14.99',
+            'description' => 'The Claw Hand Rake',
+            'size' => 'small, large'
+          },
+          {
+            'quantity' => 1544,
+            'price' => '310.83'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28057a',
+            'product_group' => 'Hardware',
+            'price' => '14.99',
+            'description' => '16 Penny Nails',
+            'size' => ''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 29,
+            'weight' => '1',
+            'name' => 'os28057b',
+            'product_group' => 'Hardware',
+            'price' => '12.99',
+            'description' => '8 Penny Nails',
+            'size' => ''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 50,
+            'weight' => '1',
+            'name' => 'os28057c',
+            'product_group' => 'Hardware',
+            'price' => '13.99',
+            'description' => '10 Penny Nails',
+            'size' => ''
+          },
+          {
+            'quantity' => 179,
+            'price' => '41.97'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '3',
+            'name' => 'os28008',
+            'product_group' => 'Ladders',
+            'price' => '29.99',
+            'description' => 'Painters Ladder',
+            'size' => '6\''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 1,
+            'weight' => '3',
+            'name' => 'os28085',
+            'product_group' => 'Ladders',
+            'price' => '36.99',
+            'description' => 'Big A A-Frame Ladder',
+            'size' => '6\', 12\''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 97,
+            'weight' => '',
+            'name' => 'os29000',
+            'product_group' => 'Ladders',
+            'price' => '44.99',
+            'description' => '3\' Step Ladder',
+            'size' => ''
+          },
+          {
+            'quantity' => 198,
+            'price' => '111.97'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28066',
+            'product_group' => 'Measuring Tools',
+            'price' => '14.99',
+            'description' => 'Big L Carpenters Square',
+            'size' => '1\', 3\''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 99,
+            'weight' => '1',
+            'name' => 'os28082',
+            'product_group' => 'Measuring Tools',
+            'price' => '34.99',
+            'description' => '24" Level',
+            'size' => '24"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 95,
+            'weight' => '1',
+            'name' => 'os28084',
+            'product_group' => 'Measuring Tools',
+            'price' => '19.99',
+            'description' => 'Tape Measure',
+            'size' => '10\', 16\', 24\', 36\''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28086',
+            'product_group' => 'Measuring Tools',
+            'price' => '12.99',
+            'description' => 'Folding Ruler',
+            'size' => '6\''
+          },
+          {
+            'quantity' => 394,
+            'price' => '82.96'
+          },
+          {
+            'stock_message' => 'In Stock',
+            'quantity' => 1,
+            'weight' => '',
+            'name' => 'gift_cert',
+            'product_group' => 'Miscellaneous',
+            'price' => '1.00',
+            'description' => 'Gift Certificate',
+            'size' => ''
+          },
+          {
+            'quantity' => 1,
+            'price' => 1
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 93,
+            'weight' => '1',
+            'name' => 'os28004',
+            'product_group' => 'Painting Supplies',
+            'price' => '21.99',
+            'description' => 'Ergo Roller',
+            'size' => '1\', 1.5\''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28005',
+            'product_group' => 'Painting Supplies',
+            'price' => '8.99',
+            'description' => 'Trim Brush',
+            'size' => '1", 2", 3"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 90,
+            'weight' => '1',
+            'name' => 'os28006',
+            'product_group' => 'Painting Supplies',
+            'price' => '29.99',
+            'description' => 'Painters Brush Set',
+            'size' => 'set'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 85,
+            'weight' => '1',
+            'name' => 'os28007',
+            'product_group' => 'Painting Supplies',
+            'price' => '14.99',
+            'description' => 'Disposable Brush Set',
+            'size' => 'set'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 40,
+            'weight' => '1',
+            'name' => 'os28011',
+            'product_group' => 'Painting Supplies',
+            'price' => '14.99',
+            'description' => 'Spackling Knife',
+            'size' => '2"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28081',
+            'product_group' => 'Painting Supplies',
+            'price' => '8.99',
+            'description' => 'Steel Wool',
+            'size' => 'fine, light, course'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 30,
+            'weight' => '1',
+            'name' => 'os28087',
+            'product_group' => 'Painting Supplies',
+            'price' => '11.99',
+            'description' => 'Sanders Multi-Pac',
+            'size' => 'set'
+          },
+          {
+            'quantity' => 538,
+            'price' => '111.93'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '1',
+            'name' => 'os28068a',
+            'product_group' => 'Safety Equipment',
+            'price' => '5.99',
+            'description' => 'Breathe Right Face Mask',
+            'size' => ''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 99,
+            'weight' => '1',
+            'name' => 'os28068b',
+            'product_group' => 'Safety Equipment',
+            'price' => '12.00',
+            'description' => 'The Bug Eye Wear',
+            'size' => ''
+          },
+          {
+            'quantity' => 199,
+            'price' => '17.99'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 100,
+            'weight' => '2',
+            'name' => 'os28069',
+            'product_group' => 'Tool Storage',
+            'price' => '44.99',
+            'description' => 'Flat Top Toolbox',
+            'size' => '20"x 8.5" x 9"'
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 0,
+            'weight' => '1',
+            'name' => 'os28070',
+            'product_group' => 'Tool Storage',
+            'price' => '39.99',
+            'description' => 'Electricians Tool Belt',
+            'size' => ''
+          },
+          {
+            'stock_message' => 'Ships in 3-5 days',
+            'quantity' => 97,
+            'weight' => '1',
+            'name' => 'os28077',
+            'product_group' => 'Tool Storage',
+            'price' => '39.99',
+            'description' => 'Carpenter\'s Tool Belt',
+            'size' => ''
+          },
+          {
+            'quantity' => 197,
+            'price' => '124.97'
+          }
+        ];

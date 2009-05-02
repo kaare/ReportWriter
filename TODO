@@ -1,0 +1,3 @@
+- Move header, footer, body into page section. Both yml and Config.pm
+- Make unit conversion to a role if attributes can have multiple getters.
+- Locale

@@ -1,0 +1,61 @@
+---
+layout: report.std.yml
+rows:
+  - name: row1
+    columns:
+    - name: name
+      width: 25
+    - name: description
+      width: 100
+    - name: price
+      width: 25
+    - name: weight
+      width: 25
+    - name: quantity
+      width: 25
+    - name: size
+      width: 25
+totals:
+  - name: product_group
+    label: Total $product_group
+    font:
+      face: Helvetica-Bold
+      size: 10
+    column_names:
+    - quantity
+    - price
+body:
+  header:
+    columns:
+    - local: Name
+    - local: Description
+    - local: Price
+    - local: Weight
+    - local: Quantity
+    - local: Size
+page:
+  format: A4
+  total:
+    - quantity
+    - price
+  header:
+    test:
+      direction: horizontal
+      startx: 10
+      starty: 22
+      # spacer: 5
+      font:
+        face: Helvetica-Bold
+        size: 10
+      fields:
+      - label: Side
+        width: 50
+        height: 12
+        text: $PAGENR
+      - label: Faktura
+        width: 50
+        text: $PAGE->{invoicenr}
+      - label: Betalingsbetingelser
+        width: 50
+        text: $PAGE{payterms}
+  footer:

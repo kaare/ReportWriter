@@ -1,0 +1,10 @@
+---
+totals:
+  - key: product_group
+    columns:
+    - quantity
+    - price
+  - key: name
+    columns:
+    - quantity
+    - price

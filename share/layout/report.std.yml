@@ -1,0 +1,20 @@
+---
+page:
+  header:
+    number:
+      align: right
+      font:
+        face: Arial-Bold
+        size: 8
+      local: 'Page: $PAGENR'
+      xpos: 190
+      ypos: 6
+      width: 50
+body:
+  startx: 5
+  starty: 50
+  width:  200
+  height: 300
+  font:
+    face: Helvetica
+    size: 10
