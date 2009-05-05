@@ -25,7 +25,6 @@ use Data::Dumper;##
 
 sub BUILD {
     my $self = shift;
-say "type", $self->type;
     with 'ReportWriter::Output::Role::' . $self->type;
 }
 
@@ -35,13 +34,13 @@ Call this method with a hashref containing the row of data
 
 =cut
 sub row {
-    my ($self, $row) = @_;
-    $self->reportrow($row, $_) for @{ $self->report->rows };
+    my ($self, $rowdata) = @_;
+    $self->reportrow($rowdata, $_) for @{ $self->report->rows };
 }
 
 sub reportrow {
-    my ($self, $row, $reportrow) = @_;
-    $self->column($row->{$_->name}, $_) for @{ $reportrow->columns };
+    my ($self, $rowdata, $reportrow) = @_;
+    $self->column($rowdata->{$_->name}, $_) for @{ $reportrow->columns };
 }
 
 #sub result { ## Can we require this from the output role?
