@@ -157,7 +157,7 @@ sub _column {
     $column->{width} = $column->{width} * $self->{unit} if $column->{width} and $self->{unit};
 =cut
 
-    return ReportWriter::Column->new(_params($column, qw/name width align/) );
+    return ReportWriter::Column->new(_params($column, qw/name width align text/) );
 }
 
 =head2 _page
@@ -248,7 +248,7 @@ Warning! startx and starty are being modified here
 sub _containerfield {
     my ( $self, $field, $direction, $startx, $starty ) = @_;
 
-    my %params = _params($field, qw/label text width/);
+    my %params = _params($field, qw/label align text width/);
     $params{startx} = $$startx;
     $params{starty} = $$starty;
     my $containerfield = ReportWriter::Containerfield->new( %params );
@@ -271,10 +271,11 @@ sub _body {
     return undef unless $config->{body};
 
     my $body = $config->{body};
-    $self->report->body(
-        ReportWriter::Body->new(_params($body, qw/startx starty width height/) )
-    );
+    my $reportbody = ReportWriter::Body->new(_params($body, qw/startx starty width height/) );
 
+    # Body headers
+    $reportbody->add_containers( map {$self->_bodyheader($_, $body, $config) } values %{ $body->{header} } );
+    $self->report->body($reportbody);
 =pod
     $body->{start} = $self->page->{size}->{height} - $body->{start} * $self->{unit} if $body->{start} and $self->{unit}; # if defined we'll convert to right units
     $body->{start} ||= $self->page->{size}->{height} - $self->{headerpos} * $self->{unit} - $self->{height} if defined $self->{headerpos} and defined $self->{unit};
@@ -302,10 +303,17 @@ sub _body {
 }
 
 sub _bodyheader {
-    my ( $self, $header, $body ) = @_;
+    my ( $self, $header, $body, $config ) = @_;
 
-    my @columns = @{ clone( $self->columns ) };
-    return [ map { merge( shift @columns, $_ ) } @{ $header->{columns} } ];
+    my $slice;
+    @{ $header}{qw/startx starty width/} = @{ $body}{qw/startx starty width/};
+    $header->{height} = 12; ## Find some meaningful value, plz ##
+    $header->{direction} = 'horizontal';
+    # Header labels points to the wanted row
+    my ($row) = grep {$_->{name} eq $header->{labels}} @{ $config->{rows} };
+    my @fields = map { { text => $_->{label}, width => $_->{width}, align => $_->{align} } } @{ $row->{columns} };
+    $header->{fields} = [ @fields ]; 
+    return $self->_container($header)
 }
 
 =head2 _params

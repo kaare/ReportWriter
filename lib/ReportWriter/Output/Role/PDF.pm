@@ -68,7 +68,6 @@ after 'page' => sub {
     $self->header;
 ##    $self->page_images; ## Role ?
 ##   $self->page_graphics; ## Role ?
-    $self->set_ypos($self->report->body->cstarty);
 
     return;
 };
@@ -77,7 +76,6 @@ sub out_text {
     my ( $self, $text, $config ) = @_;
 
     return unless defined $text;
-
     #    my $trans = $self->{outclass}->{translation}; ## Translation as role
     #    $text = $trans->text($text);
 
@@ -116,6 +114,11 @@ sub header {
 
     my $header = $self->report->header;
     $self->container($_) for @{$header->containers};
+    my $body = $self->report->body;
+    $self->container($_) for @{$body->header};
+    $self->set_ypos($self->report->body->cstarty);
+    $self->increment_ypos($_->height) for @{$body->header};
+
     #    $self->{xpos} = 0; ## Or where header starts
     #    for my $header (@{ $headers }) {
     #        $self->{ypos} = $header->{vstart};

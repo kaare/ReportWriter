@@ -5,19 +5,26 @@ rows:
     columns:
     - name: name
       width: 25
+      text: x $name
+      label: Name
     - name: description
       width: 100
+      label: Description
     - name: price
       width: 25
       align: right
+      label: Price
     - name: weight
       width: 25
       align: right
+      label: Weight
     - name: quantity
       width: 25
       align: right
+      label: Qty
     - name: size
       width: 25
+      label: Size
 totals:
   - name: product_group
     label: Total $product_group
@@ -29,13 +36,12 @@ totals:
     - price
 body:
   header:
-    columns:
-    - local: Name
-    - local: Description
-    - local: Price
-    - local: Weight
-    - local: Quantity
-    - local: Size
+    rows:
+      labels: row1
+      font:
+        face: Helvetica-Bold
+        size: 10
+      
 page:
   format: A4
   total:
