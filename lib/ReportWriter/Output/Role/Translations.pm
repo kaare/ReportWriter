@@ -26,6 +26,10 @@ before 'column' => sub {
     my ( $self, $value, $column ) = @_;
 };
 
+before 'total_column' => sub {
+    my ( $self, $col_name, $value, $column ) = @_;
+};
+
 before 'field' => sub {
     my ( $self, $field ) = @_;
     $field->{result} = $self->text($field->text);
