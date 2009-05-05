@@ -141,7 +141,7 @@ sub field {
     #        $self->column($header->{local} || $header->{text}, $header);
     #    }
     $self->set_ypos($field->{starty});
-    $self->out_text($field->text, $field);
+    $self->out_text($field->result, $field);
     return;
 }
 

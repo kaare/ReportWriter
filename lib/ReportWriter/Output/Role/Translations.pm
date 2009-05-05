@@ -29,6 +29,7 @@ before 'column' => sub {
 before 'field' => sub {
     my ( $self, $field ) = @_;
     my $text = $field->text;
+    $field->{result} = $self->text($text);
 };
 
 before 'page' => sub {

@@ -47,6 +47,10 @@ has 'conversion' => (
     isa => 'Num',
     is  => 'ro',
 );
+has 'result' => (
+    isa => 'Str',
+    is  => 'ro',
+);
 
 =head2 cwidth
 
