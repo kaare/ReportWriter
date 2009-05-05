@@ -9,10 +9,13 @@ rows:
       width: 100
     - name: price
       width: 25
+      align: right
     - name: weight
       width: 25
+      align: right
     - name: quantity
       width: 25
+      align: right
     - name: size
       width: 25
 totals:

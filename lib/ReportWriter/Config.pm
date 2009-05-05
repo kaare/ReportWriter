@@ -51,7 +51,6 @@ sub BUILD {
         $self->_footer($page);
     }
     $self->_body($cfg);
-
 ##
     #    use Data::Dumper;
     #    say STDERR Dumper $cfg, $self->report;
@@ -94,7 +93,7 @@ sub _totals {
         for my $row ( @{ $self->report->rows } ) {
             push @columns, grep {@{ $total->{column_names} } ~~ $_->name } @{ $row->columns };
         }
-        my $reporttotal = ReportWriter::Total->new(_params($total, qw/name/) );
+        my $reporttotal = ReportWriter::Total->new(_params($total, qw/name height/) );
         $reporttotal->add_columns(@columns);
         $self->report->add_totals($reporttotal);
     }
@@ -158,7 +157,7 @@ sub _column {
     $column->{width} = $column->{width} * $self->{unit} if $column->{width} and $self->{unit};
 =cut
 
-    return ReportWriter::Column->new(_params($column, qw/name width/) );
+    return ReportWriter::Column->new(_params($column, qw/name width align/) );
 }
 
 =head2 _page
@@ -230,7 +229,7 @@ sub _footer {
 sub _container {
     my ( $self, $container ) = @_;
 
-    my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height/) );
+    my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height align/) );
 
     my ($direction, $startx, $starty) = ($reportcontainer->direction, $reportcontainer->startx, $reportcontainer->starty);
     $reportcontainer->add_fields( map { $self->_containerfield($_, $direction, \$startx, \$starty) } @{ $container->{fields} } );

@@ -91,7 +91,7 @@ sub out_text {
     $pdf->size($config->fontsize);
     $config->unit($self->report->unit);
     my $linespace = $config->cheight;
-    my ($new_xpos, $new_ypos) = $pdf->add_paragraph($text, $config->cstartx, $self->ypos, $config->cwidth, $config->cheight, 0, $linespace);
+    my ($new_xpos, $new_ypos) = $pdf->add_paragraph($text, $config->cstartx, $self->ypos, $config->cwidth, $config->cheight, 0, $linespace, $config->align);
 
 =pod
  Here we have to decide if add_paragraph writes more than one row. Or else we have 
