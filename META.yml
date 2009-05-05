@@ -1,0 +1,69 @@
+---
+name: ReportWriter
+version: 0.01
+author:
+  - 'Kaare Rasmussen, <kaare@jasonic.dk>'
+abstract: Generic Perl Moose ReportWriter
+license: restrictive
+requires:
+  File::ShareDir: 1.00
+  Hash::Merge: 0.10
+  Moose: 0.64
+  Paper::Specs: 0.10
+  String::Interpolate: 0.30
+  YAML::Tiny: 1.32
+recommends:
+  OpenOffice::OOCBuilder: 0
+  PDF::API2: 0
+provides:
+  ReportWriter:
+    file: lib/ReportWriter.pm
+    version: 0.01
+  ReportWriter::Body:
+    file: lib/ReportWriter/Body.pm
+  ReportWriter::Column:
+    file: lib/ReportWriter/Column.pm
+  ReportWriter::Config:
+    file: lib/ReportWriter/Config.pm
+  ReportWriter::Container:
+    file: lib/ReportWriter/Container.pm
+  ReportWriter::Containerfield:
+    file: lib/ReportWriter/Containerfield.pm
+  ReportWriter::Field:
+    file: lib/ReportWriter/Field.pm
+  ReportWriter::Footer:
+    file: lib/ReportWriter/Footer.pm
+  ReportWriter::Header:
+    file: lib/ReportWriter/Header.pm
+  ReportWriter::Output:
+    file: lib/ReportWriter/Output.pm
+  ReportWriter::Output::Base:
+    file: lib/ReportWriter/Output/Base.pm
+  ReportWriter::Output::Report::PDF:
+    file: lib/ReportWriter/Output/Report/PDF.pm
+  ReportWriter::Output::Role::PDF:
+    file: lib/ReportWriter/Output/Role/PDF.pm
+  ReportWriter::Output::Role::Page:
+    file: lib/ReportWriter/Output/Role/Page.pm
+  ReportWriter::Output::Role::Totals:
+    file: lib/ReportWriter/Output/Role/Totals.pm
+  ReportWriter::Output::Role::Translations:
+    file: lib/ReportWriter/Output/Role/Translations.pm
+  ReportWriter::Page:
+    file: lib/ReportWriter/Page.pm
+  ReportWriter::Report:
+    file: lib/ReportWriter/Report.pm
+  ReportWriter::Role::Font:
+    file: lib/ReportWriter/Role/Font.pm
+  ReportWriter::Role::Position:
+    file: lib/ReportWriter/Role/Position.pm
+  ReportWriter::Row:
+    file: lib/ReportWriter/Row.pm
+  ReportWriter::Total:
+    file: lib/ReportWriter/Total.pm
+  ReportWriter::Types:
+    file: lib/ReportWriter/Types.pm
+generated_by: Module::Build version 0.280801
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
