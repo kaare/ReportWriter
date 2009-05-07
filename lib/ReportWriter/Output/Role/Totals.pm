@@ -65,6 +65,8 @@ sub total_row {
 
 sub total_column {
     my ($self, $col_name, $value, $config) = @_;
+    return unless $value;
+
     my ($column) = grep {$_->name eq $col_name} @{ $config->columns };
     $self->out_text($value, $column);
 }

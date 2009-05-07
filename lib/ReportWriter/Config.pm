@@ -8,12 +8,14 @@ use YAML::Tiny;
 use Paper::Specs;
 
 use ReportWriter::Body;
+use ReportWriter::Box;
 use ReportWriter::Column;
 use ReportWriter::Container;
 use ReportWriter::Containerfield;
 use ReportWriter::Field;
 use ReportWriter::Footer;
 use ReportWriter::Header;
+use ReportWriter::Image;
 use ReportWriter::Page;
 use ReportWriter::Report;
 use ReportWriter::Row;
@@ -31,7 +33,7 @@ has 'layoutdir' => (
     isa     => 'Str',
     is      => 'rw',
     default => sub {
-        return -d 'share/layout/' ? 'share/layout/' : dist_dir('Document-ReportWriter') . '/layout';
+        return -d 'share/layout/' ? 'share/layout/' : dist_dir('ReportWriter') . '/layout';
     },
     lazy => 1,
 );
@@ -287,7 +289,7 @@ Warning! startx and starty are being modified here
 sub _containerfield {
     my ( $self, $field, $direction, $startx, $starty ) = @_;
 
-    my %params = _params($field, qw/label align text width/);
+    my %params = _params($field, qw/label fontface fontsize align text width/);
     $params{startx} = $$startx;
     $params{starty} = $$starty;
     my $containerfield = ReportWriter::Containerfield->new( %params );
@@ -350,8 +352,10 @@ sub _bodyheader {
     $header->{direction} = 'horizontal';
     # Header labels points to the wanted row
     my ($row) = grep {$_->{name} eq $header->{labels}} @{ $config->{rows} };
-    my @fields = map { { text => $_->{label}, width => $_->{width}, align => $_->{align} } } @{ $row->{columns} };
+    my @fields = map { { fontface => $header->{font}{face}, fontsize => $header->{font}{size}, text => $_->{label}, width => $_->{width}, align => $_->{align} } } @{ $row->{columns} };
     $header->{fields} = [ @fields ]; 
+use Data::Dumper;
+say STDERR Dumper $header;
     return $self->_container($header)
 }
 

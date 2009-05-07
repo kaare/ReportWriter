@@ -136,7 +136,7 @@ sub page_images {
 
     for my $image (@{ $self->report->images }) {
         $image->unit($self->report->unit);
-        my $filename = "$self->root/$image->filename";
+        my $filename = join '/', $self->root, $image->filename;
         $self->pdf->add_img($filename, $image->cstartx, $image->cstarty, $image->scale);
     }
 
@@ -164,6 +164,7 @@ sub container {
 sub field {
     my ( $self, $field ) = @_;
 
+    return unless $field->result;
     #    $self->{xpos} = 0; ## Or where header starts
     #    for my $header (@{ $headers }) {
     #        $self->{ypos} = $header->{vstart};
