@@ -66,8 +66,9 @@ after 'page' => sub {
     #    $trans->new_var($_->{name}) for @{ $self->{config} };
 
     $self->header;
-##    $self->page_images; ## Role ?
-##   $self->page_graphics; ## Role ?
+    $self->body;
+    $self->page_images;
+    $self->page_graphics;
 
     return;
 };
@@ -114,16 +115,41 @@ sub header {
 
     my $header = $self->report->header;
     $self->container($_) for @{$header->containers};
+    return;
+}
+
+sub body {
+    my ( $self ) = @_;
+
     my $body = $self->report->body;
     $self->container($_) for @{$body->header};
     $self->set_ypos($self->report->body->cstarty);
     $self->increment_ypos($_->height) for @{$body->header};
+    my $pdf = $self->pdf;
+    $body->unit($self->report->unit);
+    $pdf->draw_rect($body->cstartx, $body->cstarty, $body->cstartx + $body->cwidth, $body->cstartx + $body->cheight) if defined $body->boxed;
+    return;
+}
 
-    #    $self->{xpos} = 0; ## Or where header starts
-    #    for my $header (@{ $headers }) {
-    #        $self->{ypos} = $header->{vstart};
-    #        $self->column($header->{local} || $header->{text}, $header);
-    #    }
+sub page_images {
+    my ($self) = @_;
+
+    for my $image (@{ $self->report->images }) {
+        $image->unit($self->report->unit);
+        my $filename = "$self->root/$image->filename";
+        $self->pdf->add_img($filename, $image->cstartx, $image->cstarty, $image->scale);
+    }
+
+    return;
+}
+
+sub page_graphics {
+    my ($self) = @_;
+
+    for my $box (@{ $self->report->boxes }) {
+        $box->unit($self->report->unit);
+        $self->pdf->draw_rect($box->cstartx, $box->cstarty, $box->cstartx + $box->width, $box->cstarty + $box->cheight);
+    }
 
     return;
 }

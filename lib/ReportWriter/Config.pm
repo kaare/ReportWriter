@@ -45,6 +45,7 @@ sub BUILD {
     $self->report( ReportWriter::Report->new );
     $self->_rows($cfg);
     $self->_totals($cfg);
+    $self->_images($cfg);
     if ( my $page = $cfg->{page} ) {
         $self->_page($page);
         $self->_header($page);
@@ -160,6 +161,44 @@ sub _column {
     return ReportWriter::Column->new(_params($column, qw/name width align text/) );
 }
 
+=head2 _image
+
+Images
+
+=cut
+
+sub _images {
+    my ( $self, $config ) = @_;
+
+    return undef unless $config->{images};
+
+    for my $image ( @{ $config->{images} } ) {
+        my $reportimage = ReportWriter::Image->new( _params($image, qw/startx starty width height scale filename/) );
+        $self->report->add_images($reportimage);
+    }
+
+    return;
+}
+
+=head2 _box
+
+Box
+
+=cut
+
+sub _boxes {
+    my ( $self, $config ) = @_;
+
+    return undef unless $config->{boxes};
+
+    for my $box ( @{ $config->{boxes} } ) {
+        my $reportbox = ReportWriter::Box->new( _params($box, qw/startx starty width height fill type thickness/) );
+        $self->report->add_boxes($reportbox);
+    }
+
+    return;
+}
+
 =head2 _page
 
 Headers
@@ -271,7 +310,7 @@ sub _body {
     return undef unless $config->{body};
 
     my $body = $config->{body};
-    my $reportbody = ReportWriter::Body->new(_params($body, qw/startx starty width height/) );
+    my $reportbody = ReportWriter::Body->new(_params($body, qw/startx starty width height boxed/) );
 
     # Body headers
     $reportbody->add_containers( map {$self->_bodyheader($_, $body, $config) } values %{ $body->{header} } );

@@ -30,6 +30,26 @@ has 'totals' => (
         'pop'  => 'remove_last_total',
     }
 );
+has 'images' => (
+    metaclass => 'Collection::Array',
+    is        => 'ro',
+    isa       => 'ArrayRef[ReportWriter::Image]',
+    default   => sub { [] },
+    provides  => {
+        'push' => 'add_images',
+        'pop'  => 'remove_last_image',
+    }
+);
+has 'boxes' => (
+    metaclass => 'Collection::Array',
+    is        => 'ro',
+    isa       => 'ArrayRef[ReportWriter::Box]',
+    default   => sub { [] },
+    provides  => {
+        'push' => 'add_boxes',
+        'pop'  => 'remove_last_box',
+    }
+);
 has page => (
     isa => 'Maybe[ReportWriter::Page]',
     is  => 'rw',

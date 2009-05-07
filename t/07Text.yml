@@ -35,6 +35,7 @@ totals:
     - quantity
     - price
 body:
+  boxed: normal
   header:
     rows:
       labels: row1
