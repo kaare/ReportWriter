@@ -1,4 +1,44 @@
+TODOs
+
+- Finish var substitution, functions
+  Standard vars, pagenumber, pageof(?), today(?)
+  Could be objects, so today could do today->ymd etc
+- Roleify Config, add roles PDF, Page, etc.
+  New attribute, type - same as for Output
+  Autocalc height
+  Calculate correct starty for 2nd body headers
 - Move header, footer, body into page section. Both yml and Config.pm
 - Consider ditto re images, boxes
 - Make unit conversion to a role if attributes can have multiple getters.
 - Locale
+
+Laters
+
+- Features
+  Colors, fore-, back, line
+  Topline, underline
+  Images, logos
+  Boxes, normal, rounded, shaded
+  zebra striped lines
+- PDF Output
+  Use a ready made PDF layout as background
+- All report types
+  PDF, Text, HTML, Ooo, Excel, etc
+- Figure out if page is adequate for sheet based reports too
+  Can containers be used as a kind of row statement
+
+Clean ups
+
+- Tests
+  Not all objects have tests now
+  Tests for all report types
+  Tests for multi level totals
+
+Before release
+
+- Adequate documentation
+
+Maybes
+
+- Autoloader for ReportWriter objects, i.e. 'use ReportWriter :all' or sth
+
