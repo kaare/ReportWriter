@@ -10,7 +10,6 @@ with 'ReportWriter::Role::Position';
 has 'boxed' => (
     isa     => 'boxtype',
     is      => 'rw',
-    default => 'normal',
 );
 has 'header' => (
     metaclass => 'Collection::Array',

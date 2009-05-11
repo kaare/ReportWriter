@@ -55,8 +55,8 @@ sub BUILD {
     }
     $self->_body($cfg);
 ##
-    #    use Data::Dumper;
-    #    say STDERR Dumper $cfg, $self->report;
+    # use Data::Dumper;
+    # say STDERR Dumper $cfg, $self->report;
 ##
 }
 
@@ -114,6 +114,9 @@ sub _rows {
     return undef unless $config->{rows};
 
     for my $row ( @{ $config->{rows} } ) {
+## This works for page (body) type reports only ##
+        $row->{startx} ||= $config->{body}{startx};
+        $row->{starty} ||= $config->{body}{starty};
         my $reportrow = ReportWriter::Row->new( _params($row, qw/name/) );
         $reportrow->add_columns( map { $self->_column($_) } @{ $row->{columns} } );
         $self->report->add_rows($reportrow);
@@ -354,8 +357,6 @@ sub _bodyheader {
     my ($row) = grep {$_->{name} eq $header->{labels}} @{ $config->{rows} };
     my @fields = map { { fontface => $header->{font}{face}, fontsize => $header->{font}{size}, text => $_->{label}, width => $_->{width}, align => $_->{align} } } @{ $row->{columns} };
     $header->{fields} = [ @fields ]; 
-use Data::Dumper;
-say STDERR Dumper $header;
     return $self->_container($header)
 }
 

@@ -66,9 +66,9 @@ after 'page' => sub {
     #    $trans->new_var($_->{name}) for @{ $self->{config} };
 
     $self->header;
-    $self->body;
     $self->page_images;
     $self->page_graphics;
+    $self->body;
 
     return;
 };
@@ -122,12 +122,18 @@ sub body {
     my ( $self ) = @_;
 
     my $body = $self->report->body;
-    $self->container($_) for @{$body->header};
-    $self->set_ypos($self->report->body->cstarty);
-    $self->increment_ypos($_->height) for @{$body->header};
+
     my $pdf = $self->pdf;
     $body->unit($self->report->unit);
-    $pdf->draw_rect($body->cstartx, $body->cstarty, $body->cstartx + $body->cwidth, $body->cstartx + $body->cheight) if defined $body->boxed;
+    $self->set_ypos($body->cstarty);
+    my $starty = $self->ypos;
+    $self->set_ypos($body->cstarty + $body->cheight);
+    my $endy   = $self->ypos;
+    $pdf->draw_rect($body->cstartx, $starty, $body->cstartx + $body->cwidth, $endy) if defined $body->boxed;
+
+    $self->container($_) for @{$body->header};
+    $self->set_ypos($body->cstarty);
+    $self->increment_ypos($_->height) for @{$body->header};
     return;
 }
 
@@ -137,7 +143,7 @@ sub page_images {
     for my $image (@{ $self->report->images }) {
         $image->unit($self->report->unit);
         my $filename = join '/', $self->root, $image->filename;
-        $self->pdf->add_img($filename, $image->cstartx, $image->cstarty, $image->scale);
+        $self->pdf->add_img($filename, $image->cstartx, $self->ypos($image->cstarty), $image->scale);
     }
 
     return;
@@ -170,7 +176,8 @@ sub field {
     #        $self->{ypos} = $header->{vstart};
     #        $self->column($header->{local} || $header->{text}, $header);
     #    }
-    $self->set_ypos($field->{starty});
+    $field->unit($self->report->unit);
+    $self->set_ypos($field->cstarty);
     $self->out_text($field->result, $field);
     return;
 }
