@@ -20,6 +20,10 @@ Laters
   Images, logos
   Boxes, normal, rounded, shaded
   zebra striped lines
+- Config
+  Totals, shadowing rows.
+  Right now there's only one total, what if we have more rows.
+  Perhaps totals could need more loving care. How about labels and stuff
 - PDF Output
   Use a ready made PDF layout as background
 - All report types
