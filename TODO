@@ -1,19 +1,23 @@
 TODOs
 
-- Finish var substitution, functions
+- Translations
+  Start with relevant tests for column, field, total_column
+  Finish var substitution, functions
   Standard vars, pagenumber, pageof(?), today(?)
   Could be objects, so today could do today->ymd etc
 - Roleify Config, add roles PDF, Page, etc.
   New attribute, type - same as for Output
   Autocalc height
   Calculate correct starty for 2nd body headers
-- Move header, footer, body into page section. Both yml and Config.pm
-- Consider ditto re images, boxes
 - Make unit conversion to a role if attributes can have multiple getters.
-- Locale
+- End report
+  Last totals need to be finished.
 
 Laters
 
+- Move header, footer, body into page section. Both yml and Config.pm
+- Consider ditto re images, boxes
+- Locale
 - Features
   Colors, fore-, back, line
   Topline, underline
