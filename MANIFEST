@@ -1,6 +1,7 @@
 Build.PL
 lib/ReportWriter.pm
 lib/ReportWriter/Body.pm
+lib/ReportWriter/Box.pm
 lib/ReportWriter/Column.pm
 lib/ReportWriter/Config.pm
 lib/ReportWriter/Container.pm
@@ -8,6 +9,7 @@ lib/ReportWriter/Containerfield.pm
 lib/ReportWriter/Field.pm
 lib/ReportWriter/Footer.pm
 lib/ReportWriter/Header.pm
+lib/ReportWriter/Image.pm
 lib/ReportWriter/Output.pm
 lib/ReportWriter/Output/Base.pm
 lib/ReportWriter/Output/Report/PDF.pm
@@ -33,14 +35,17 @@ t/07Text.yml
 t/07Textdata
 t/_reportwriter_test_.db
 t/body.t
+t/box.t
 t/column.t
 t/container.t
 t/containerfield.t
 t/field.t
 t/footer.t
 t/header.t
+t/image.t
 t/report.t
 t/row.t
+t/translations.t
 t/types.t
 TODO
 META.yml

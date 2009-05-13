@@ -34,6 +34,7 @@ Laters
   PDF, Text, HTML, Ooo, Excel, etc
 - Figure out if page is adequate for sheet based reports too
   Can containers be used as a kind of row statement
+- Filename in ::Image should probably be of type filename
 
 Clean ups
 
