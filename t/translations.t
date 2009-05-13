@@ -22,6 +22,30 @@ sub page {
 };
 
 1;
+=pod
+
+Translations tests
+
+Allowed
+
+$PAGENR
+$PAGE{sth}
+$VAR{sth]
+$TOTAL{sth}
+$rowdata
+function - or at least some layout, sprintf or sth
+$object->method for Datetime, more?
+i18n
+
+method       should allow access to
+
+column       (all?) row data, page data, total data
+
+total_column page data, total data
+
+field        page data, total data, page total data
+
+=cut
 
 package main;
 
