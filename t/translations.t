@@ -5,6 +5,11 @@ use Moose;
 
 with 'ReportWriter::Output::Role::Translations';
 
+sub row {
+    my ( $self, $row ) = @_;
+    return $row;
+};
+
 sub column {
     my ( $self, $value, $column ) = @_;
 };
@@ -52,15 +57,18 @@ package main;
 use 5.010;
 use strict;
 use warnings;
-use Test::More tests => 7;
+use Test::More tests => 10;
 use ReportWriter::Field;
 
-my $field = ReportWriter::Field->new(text => 'Page $PAGENR');
+my $field = ReportWriter::Field->new(text => 'Page $PAGENR $ROW{number}');
 
 ok(my $test = Test::Translations->new, 'Test instance');
 ok($test->column(1,2), 'Column');
 ok(my $result = $test->field($field), 'Field');
-is($result, 'Page 0', 'Page 0');
+is($result, 'Page 0 ', 'Page 0');
 ok($test->page($field), 'New page');
 ok($result = $test->field($field), 'Field');
-is($result, 'Page 1', 'Page 1');
+is($result, 'Page 1 ', 'Page 1');
+ok($test->row({number => 12345}), 'Row');
+ok($result = $test->field($field), 'Field');
+is($result, 'Page 1 12345', 'Page 1');

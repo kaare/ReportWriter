@@ -22,6 +22,11 @@ sub _build_template {
     return $template;
 }
 
+before 'row' => sub {
+    my ( $self, $row ) = @_;
+    $self->template->{ROW} = $row;
+};
+
 before 'column' => sub {
     my ( $self, $value, $column ) = @_;
 };
@@ -41,10 +46,6 @@ before 'page' => sub {
     $pagenr++;
 };
 
-sub next_page {
-    $pagenr++;
-}
-
 sub page_data {
     my ( $self, $page_data ) = @_;
 
@@ -53,7 +54,7 @@ sub page_data {
 
 sub new_var {
     my ( $self, $name ) = @_;
-    $self->template->{$name} = 0;
+    $self->template->{VAR}{$name} = 0;
 }
 
 sub total_var {
