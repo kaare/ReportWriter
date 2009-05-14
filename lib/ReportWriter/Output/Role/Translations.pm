@@ -16,7 +16,7 @@ our $pagenr = 0; ## Class attribute?
 sub _build_template {
     my $self     = shift;
     my $template = String::Interpolate->new;
-    $template->{PAGENR} ||= sub () { $pagenr };
+    $template->{PAGENR} = sub () {$pagenr };
     $template->{TIME} = sub () {localtime};
     $template->{ISODATE} = sub () { my @time = localtime; return join '-', $time[5] + 1900, $time[4] + 1, $time[3] };
     return $template;
@@ -42,14 +42,12 @@ before 'field' => sub {
 
 before 'page' => sub {
     my ( $self, $page_data ) = @_;
-
     $pagenr++;
 };
 
 sub page_data {
     my ( $self, $page_data ) = @_;
-
-    $self->template->{PAGE} = sub () { $page_data };
+    $self->template->{PAGE} = $page_data;
 }
 
 sub new_var {
@@ -64,6 +62,8 @@ sub total_var {
 
 sub text {
     my ( $self, $text ) = @_;
+    ## Translation of totals can possibly be provided later. See translations.t
+    ## $self->template->{TOTAL} = $self->breaks;
     return scalar $self->template->($text);
 }
 
