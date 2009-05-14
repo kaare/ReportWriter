@@ -1,5 +1,6 @@
 Build.PL
 lib/ReportWriter.pm
+lib/ReportWriter.pod
 lib/ReportWriter/Body.pm
 lib/ReportWriter/Box.pm
 lib/ReportWriter/Column.pm
