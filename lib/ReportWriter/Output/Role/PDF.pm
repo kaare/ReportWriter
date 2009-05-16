@@ -23,7 +23,7 @@ with qw(
 around 'ypos' => sub {
     my ($orig, $self, $ypos) = @_;
     $ypos = $self->$orig();
-    return unless $ypos;
+    return unless defined $ypos;
 
     $self->report->page->unit($self->report->unit) if $self->report->unit;
     my $paperheight = $self->report->page->cheight;
@@ -142,8 +142,9 @@ sub page_images {
 
     for my $image (@{ $self->report->images }) {
         $image->unit($self->report->unit);
+        $self->set_ypos($image->cstarty);
         my $filename = join '/', $self->root, $image->filename;
-        $self->pdf->add_img($filename, $image->cstartx, $self->ypos($image->cstarty), $image->scale);
+        $self->pdf->add_img($filename, $image->cstartx, $self->ypos, $image->scale);
     }
 
     return;
