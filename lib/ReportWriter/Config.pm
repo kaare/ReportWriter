@@ -274,10 +274,8 @@ sub _container {
     my ( $self, $container ) = @_;
 
     my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height align/) );
-
-    my ($direction, $startx, $starty) = ($reportcontainer->direction, $reportcontainer->startx, $reportcontainer->starty);
-    $reportcontainer->add_fields( map { $self->_containerfield($_, $direction, \$startx, \$starty) } @{ $container->{fields} } );
-    $reportcontainer->direction( $container->{direction} ) if $container->{direction};
+    my ($startx, $starty) = ($reportcontainer->startx, $reportcontainer->starty);
+    $reportcontainer->add_fields( map { $self->_containerfield($_, $reportcontainer, \$startx, \$starty) } @{ $container->{fields} } );
     return $reportcontainer;
 }
 
@@ -290,15 +288,16 @@ Warning! startx and starty are being modified here
 =cut
 
 sub _containerfield {
-    my ( $self, $field, $direction, $startx, $starty ) = @_;
+    my ( $self, $field, $container, $startx, $starty ) = @_;
 
     my %params = _params($field, qw/label fontface fontsize align text width/);
+    $params{direction} ||= $container->direction;
+    $params{width} ||= $container->width;
     $params{startx} = $$startx;
     $params{starty} = $$starty;
     my $containerfield = ReportWriter::Containerfield->new( %params );
-
-    if ($direction eq 'vertical') {
-        $$starty += $field->{height} // 0;
+    if ($params{direction} eq 'vertical') {
+        $$starty += $field->{height} // 12;
     } else {
         $$startx += $field->{width} // 0;
     }
