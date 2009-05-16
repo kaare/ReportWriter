@@ -228,6 +228,7 @@ sub add_paragraph {
     my ( $self, $text, $hPos, $vPos, $width, $height, $indent, $lead, $align ) = @_;
 
     $height = 600;    ##
+    $lead   = 12;     ##
     my $txt = $self->{page}->text;
     $txt->font( $self->{font}, $self->size );
 
