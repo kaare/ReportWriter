@@ -1,5 +1,6 @@
 package ReportWriter::Config::Role::PDF;
 
+use 5.010;
 use Moose::Role;
 
 with 'ReportWriter::Config::Role::Page';
