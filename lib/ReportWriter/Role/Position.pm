@@ -1,5 +1,6 @@
 package ReportWriter::Role::Position;
 
+use 5.010;
 use Moose::Role;
 use ReportWriter::Types;
 

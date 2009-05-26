@@ -1,5 +1,6 @@
 package ReportWriter::Role::Font;
 
+use 5.010;
 use Moose::Role;
 
 has 'fontface' => (
