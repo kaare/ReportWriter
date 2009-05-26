@@ -40,6 +40,7 @@ Laters
     ReportWriter::Output::Role::Translations
     ReportWriter::Output::Role::Totals
   be in ReportWriter::Output instead of ReportWriter::Output::Role::PDF and other Output roles?
+- Redo _params method as a Moose meta thing
 
 Clean ups
 
