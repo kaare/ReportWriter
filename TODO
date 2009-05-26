@@ -35,6 +35,11 @@ Laters
 - Figure out if page is adequate for sheet based reports too
   Can containers be used as a kind of row statement
 - Filename in ::Image should probably be of type filename
+- Structural
+  Shouldn't
+    ReportWriter::Output::Role::Translations
+    ReportWriter::Output::Role::Totals
+  be in ReportWriter::Output instead of ReportWriter::Output::Role::PDF and other Output roles?
 
 Clean ups
 
