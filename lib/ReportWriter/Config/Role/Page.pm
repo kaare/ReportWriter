@@ -119,9 +119,9 @@ sub _containerfield {
     $params{starty} = $$starty;
     my $containerfield = ReportWriter::Containerfield->new( %params );
     if ($params{direction} eq 'vertical') {
-        $$starty += $field->{height} // 12;
+        $$starty += $field->{height}
     } else {
-        $$startx += $field->{width} // 0;
+        $$startx += $field->{width};
     }
     return $containerfield;
 }
