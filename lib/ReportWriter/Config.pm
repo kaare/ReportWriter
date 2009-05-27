@@ -111,6 +111,8 @@ sub _rows {
     return undef unless $config->{rows};
 
     for my $row ( @{ $config->{rows} } ) {
+use Data::Dumper;
+say STDERR Dumper $row;
 ## This works for page (body) type reports only ##
         $row->{startx} ||= $config->{body}{startx};
         $row->{starty} ||= $config->{body}{starty};

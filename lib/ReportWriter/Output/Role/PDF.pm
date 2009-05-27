@@ -35,42 +35,16 @@ sub _build_pdf {
 
     # Set unit for report
     $self->report->unit('pt') unless $self->report->has_unit;
-
-    my $papername   = 'A4';          ## This should really be a report setting
-    my $orientation = 'Portrait';    ## ditto
     return ReportWriter::Output::Report::PDF->new(
         filename        => $self->filename,
-        PageSize        => $papername,
-        PageOrientation => $orientation,
+        PageSize        => $self->report->papername,
+        PageOrientation => $self->report->orientation,
     );
 }
 
 after 'reportrow' => sub {
     my ( $self, $row, $reportrow ) = @_;
-
-    # Perhaps a better way is to only total columns from a config parameter
-    # or check if column is a number in some way
-    #    my $trans = $self->{outclass}->{translation};  ## Translation as a role
-    #    $trans->total_var($_, $rec->{$_}) for keys %{ $rec }; ## Totalling as a role
     $self->increment_ypos($reportrow->height); ## Unless the actual report implementation has written more rows. We need to solve that question
-};
-
-after 'page' => sub {
-    my ($self) = @_;
-## We need to rethink the translation issue
-    # in the case of page totals we'd like to keep variable names somewhere.
-    # But is Translations the correct place?
-    # Even more, this bit of code looks like it should go into Page.pm, not PDF
-    #    my $trans = $self->{outclass}->{translation}; ## Translation as role
-    #    $trans->next_page;
-    #    $trans->new_var($_->{name}) for @{ $self->{config} };
-
-    $self->header;
-    $self->page_images;
-    $self->page_graphics;
-    $self->body;
-
-    return;
 };
 
 sub out_text {

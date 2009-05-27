@@ -6,8 +6,8 @@ use MooseX::AttributeHelpers;
 use ReportWriter::Types;
 
 has 'unit' => (
-    isa => 'unit',
-    is  => 'rw',
+    isa       => 'unit',
+    is        => 'rw',
     predicate => 'has_unit',
 );
 has 'rows' => (
@@ -66,12 +66,16 @@ has footer => (
     isa => 'Maybe[ReportWriter::Footer]',
     is  => 'rw',
 );
-
-after 'add_rows' => sub {
-    my ( $self, @columns ) = @_;
-
-    # Do what's necessary to make a row work in a report environment
-};
+has papername => (
+    isa     => 'Str',
+    is      => 'rw',
+    default => 'A4',
+);
+has orientation => (
+    isa     => 'orientation',
+    is      => 'rw',
+    default => 'portrait'
+);
 
 no Moose;
 

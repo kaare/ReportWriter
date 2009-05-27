@@ -21,6 +21,15 @@ after 'reportrow' => sub {
     $self->check_page;
 };
 
+after 'page' => sub {
+    my ($self) = @_;
+    $self->header;
+    $self->page_images;
+    $self->page_graphics;
+    $self->body;
+    return;
+};
+
 sub set_ypos {
     my ($self, $ypos) = @_;
     $self->{ypos} = $ypos;
