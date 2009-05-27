@@ -20,6 +20,7 @@ use ReportWriter::Page;
 use ReportWriter::Report;
 use ReportWriter::Row;
 use ReportWriter::Total;
+use ReportWriter::Types;
 
 has 'config' => (
     isa => 'Str',
@@ -27,6 +28,10 @@ has 'config' => (
 );
 has 'report' => (
     isa => 'ReportWriter::Report',
+    is  => 'rw',
+);
+has 'type' => (
+    isa => 'report_type',
     is  => 'rw',
 );
 has 'layoutdir' => (
@@ -41,7 +46,7 @@ has 'layoutdir' => (
 sub BUILD {
     my $self = shift;
 
-    with 'ReportWriter::Config::Role::' . 'PDF';##$self->type;
+    with 'ReportWriter::Config::Role::' . $self->type;
     __PACKAGE__->meta->make_immutable();
 
     my $cfg = $self->_read_config( $self->config );
@@ -111,8 +116,6 @@ sub _rows {
     return undef unless $config->{rows};
 
     for my $row ( @{ $config->{rows} } ) {
-use Data::Dumper;
-say STDERR Dumper $row;
 ## This works for page (body) type reports only ##
         $row->{startx} ||= $config->{body}{startx};
         $row->{starty} ||= $config->{body}{starty};

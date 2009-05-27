@@ -8,6 +8,7 @@ enum 'alignment'   => qw(left center right);
 enum 'boxtype'     => qw(normal rounded);
 enum 'direction'   => qw(horizontal vertical);
 enum 'orientation' => qw(portrait landscape);
+enum 'report_type' => qw(Array Text PDF);
 enum 'unit'        => qw(pt mm);
 
 no Moose::Util::TypeConstraints;

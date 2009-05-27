@@ -24,7 +24,7 @@ my $dbh = DBI->connect("dbi:SQLite:$db_file") or die $DBI::errstr;
 my ($config, $expected);
 eval `cat t/07Textdata` or die "Can't find t/07Textdata: $!"; 
 
-ok(my $repconf = ReportWriter::Config->new(config => 't/07Text.yml'), 'New ReportWriter::Config');
+ok(my $repconf = ReportWriter::Config->new(config => 't/07Text.yml', type => 'PDF'), 'New ReportWriter::Config');
 is_deeply($repconf->report->totals, $config, 'Config is OK');
 
 my $sql = 'SELECT * FROM product JOIN inventory USING (name) ORDER BY product_group';

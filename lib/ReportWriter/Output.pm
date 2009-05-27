@@ -2,11 +2,7 @@ package ReportWriter::Output;
 
 use 5.010;
 use Moose;
-use Moose::Util::TypeConstraints;
-
-enum 'output_type' => qw(Array Text PDF);
-
-no Moose::Util::TypeConstraints;
+use ReportWriter::Types;
 
 has 'filename' => (
     isa => 'Str',
@@ -23,7 +19,7 @@ has 'root' => (
     lazy    => 1,
 );
 has 'type' => (
-    isa => 'output_type',
+    isa => 'report_type',
     is  => 'rw',
 );
 
