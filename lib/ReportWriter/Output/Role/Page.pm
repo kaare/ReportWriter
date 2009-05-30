@@ -49,12 +49,11 @@ sub column {
 
 sub check_page {
     my ($self) = @_;
-##say STDERR "ypos ", $self->ypos, " cstarty ", $self->report->body->cstarty , " cheight ", $self->report->body->cheight;
-    $self->page if $self->ypos > $self->report->body->starty + $self->report->body->height;
+    $self->page if $self->ypos < $self->report->page->height - ($self->report->body->starty + $self->report->body->height);
     return;
 }
 
-## obsolete. remove wheb body invocation is in place
+## obsolete. remove when body invocation is in place
 sub headers {
     my ($self) = @_;
 

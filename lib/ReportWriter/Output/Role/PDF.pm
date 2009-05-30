@@ -25,6 +25,7 @@ around 'ypos' => sub {
     $ypos = $self->$orig();
     return unless defined $ypos;
     my $paperheight = $self->report->page->height;
+say STDERR "$paperheight - $ypos";
     return $paperheight - $ypos;
 };
 
