@@ -3,6 +3,11 @@ package ReportWriter::Config::Role::Page;
 use 5.010;
 use Moose::Role;
 
+has 'defaultfield' => (
+    isa => 'ReportWriter::Field',
+    is  => 'rw',
+);
+
 =pod
 
 Page related config stuff here
@@ -11,15 +16,17 @@ Page related config stuff here
 
 =cut
 
-after '_do_config' => sub {
-    my ($self, $cfg) = @_;
+around '_do_config' => sub {
+    my ($orig, $self, $cfg) = @_;
 
+    $self->defaultfield(ReportWriter::Field->new);
+    $self->_body($cfg);
+    $self->$orig($cfg);
     if ( my $page = $cfg->{page} ) {
         $self->_page($page);
         $self->_header($page);
         $self->_footer($page);
     }
-    $self->_body($cfg);
 ##
     # use Data::Dumper;
     # say STDERR Dumper $cfg, $self->report;
@@ -137,6 +144,10 @@ sub _body {
 
     my $body = $config->{body};
     my $reportbody = ReportWriter::Body->new(_params($body, qw/startx starty width height boxed/) );
+    if ($body->{font}) {
+        $self->defaultfield->fontface($body->{font}{face});
+        $self->defaultfield->fontsize($body->{font}{size});
+    }
 
     # Body headers
     $reportbody->add_containers( map {$self->_bodyheader($_, $body, $config) } values %{ $body->{header} } );

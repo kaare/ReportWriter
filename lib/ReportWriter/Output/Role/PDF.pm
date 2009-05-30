@@ -24,9 +24,7 @@ around 'ypos' => sub {
     my ($orig, $self, $ypos) = @_;
     $ypos = $self->$orig();
     return unless defined $ypos;
-
-    $self->report->page->unit($self->report->unit) if $self->report->unit;
-    my $paperheight = $self->report->page->cheight;
+    my $paperheight = $self->report->page->height;
     return $paperheight - $ypos;
 };
 
@@ -34,7 +32,6 @@ sub _build_pdf {
     my $self = shift;
 
     # Set unit for report
-    $self->report->unit('pt') unless $self->report->has_unit;
     return ReportWriter::Output::Report::PDF->new(
         filename        => $self->filename,
         PageSize        => $self->report->papername,
@@ -58,13 +55,14 @@ sub out_text {
     #    my $res = eval "$text"; ## Function evaluation as role
     #    $text = $res if $res and !$@;
 
-## Do actual PDF writing later
     my $pdf = $self->pdf;
     $pdf->set_font($config->fontface);
     $pdf->size($config->fontsize);
-    $config->unit($self->report->unit);
-    my $linespace = $config->cheight;
-    my ($new_xpos, $new_ypos) = $pdf->add_paragraph($text, $config->cstartx, $self->ypos, $config->cwidth, $config->cheight, 0, $linespace, $config->align);
+## Refactor PDF Report API
+# Calculate height as ypos - page end
+# lead is row height
+##
+    my ($new_xpos, $new_ypos) = $pdf->add_paragraph($text, $config->startx, $self->ypos, $config->width, $config->height, 0, $config->height, $config->align);
 
 =pod
  Here we have to decide if add_paragraph writes more than one row. Or else we have 
@@ -98,15 +96,14 @@ sub body {
     my $body = $self->report->body;
 
     my $pdf = $self->pdf;
-    $body->unit($self->report->unit);
-    $self->set_ypos($body->cstarty);
+    $self->set_ypos($body->starty);
     my $starty = $self->ypos;
-    $self->set_ypos($body->cstarty + $body->cheight);
+    $self->set_ypos($body->starty + $body->height);
     my $endy   = $self->ypos;
-    $pdf->draw_rect($body->cstartx, $starty, $body->cstartx + $body->cwidth, $endy) if defined $body->boxed;
+    $pdf->draw_rect($body->startx, $starty, $body->startx + $body->width, $endy) if defined $body->boxed;
 
     $self->container($_) for @{$body->header};
-    $self->set_ypos($body->cstarty);
+    $self->set_ypos($body->starty);
     $self->increment_ypos($_->height) for @{$body->header};
     return;
 }
@@ -115,10 +112,9 @@ sub page_images {
     my ($self) = @_;
 
     for my $image (@{ $self->report->images }) {
-        $image->unit($self->report->unit);
-        $self->set_ypos($image->cstarty);
+        $self->set_ypos($image->starty);
         my $filename = join '/', $self->root, $image->filename;
-        $self->pdf->add_img($filename, $image->cstartx, $self->ypos, $image->scale);
+        $self->pdf->add_img($filename, $image->startx, $self->ypos, $image->scale);
     }
 
     return;
@@ -128,8 +124,7 @@ sub page_graphics {
     my ($self) = @_;
 
     for my $box (@{ $self->report->boxes }) {
-        $box->unit($self->report->unit);
-        $self->pdf->draw_rect($box->cstartx, $box->cstarty, $box->cstartx + $box->width, $box->cstarty + $box->cheight);
+        $self->pdf->draw_rect($box->startx, $box->starty, $box->startx + $box->width, $box->starty + $box->height);
     }
 
     return;
@@ -151,8 +146,7 @@ sub field {
     #        $self->{ypos} = $header->{vstart};
     #        $self->column($header->{local} || $header->{text}, $header);
     #    }
-    $field->unit($self->report->unit);
-    $self->set_ypos($field->cstarty);
+    $self->set_ypos($field->starty);
     $self->out_text($field->result, $field);
     return;
 }

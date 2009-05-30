@@ -5,7 +5,7 @@ rows:
     columns:
     - name: name
       width: 25
-      text: x $name
+      text: $name
       label: Name
     - name: description
       width: 100
@@ -36,6 +36,9 @@ totals:
     - price
 body:
   boxed: normal
+  font:
+    face: Helvetica
+    size: 10
   header:
     rows:
       labels: row1

@@ -49,9 +49,8 @@ sub column {
 
 sub check_page {
     my ($self) = @_;
-    $self->report->body->unit($self->report->unit);
 ##say STDERR "ypos ", $self->ypos, " cstarty ", $self->report->body->cstarty , " cheight ", $self->report->body->cheight;
-    $self->page if $self->ypos > $self->report->body->cstarty + $self->report->body->cheight;
+    $self->page if $self->ypos > $self->report->body->starty + $self->report->body->height;
     return;
 }
 

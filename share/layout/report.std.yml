@@ -12,9 +12,9 @@ page:
       width: 50
 body:
   startx: 5
-  starty: 50
+  starty: 20
   width:  200
-  height: 300
+  height: 260
   font:
     face: Helvetica
     size: 10

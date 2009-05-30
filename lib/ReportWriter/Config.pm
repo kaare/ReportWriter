@@ -27,12 +27,31 @@ has 'config' => (
     is  => 'rw',
 );
 has 'report' => (
-    isa => 'ReportWriter::Report',
-    is  => 'rw',
+    isa     => 'ReportWriter::Report',
+    is      => 'rw',
 );
 has 'type' => (
     isa => 'report_type',
     is  => 'rw',
+    trigger => sub {
+        my ( $self, $type ) = @_;
+        $self->unit('pt') if $type eq 'PDF';
+    },
+);
+has 'unit' => (
+    isa     => 'unit',
+    is      => 'rw',
+    trigger => sub {
+        my ( $self, $unit ) = @_;
+        my %units = ( mm => 1, pt => 2.83464629 );
+        $self->{conversion} = $units{$unit};
+    },
+);
+has 'conversion' => (
+    isa     => 'Num',
+    is      => 'ro',
+    default => 1,
+    lazy    => 1,
 );
 has 'layoutdir' => (
     isa     => 'Str',
@@ -50,6 +69,7 @@ sub BUILD {
     __PACKAGE__->meta->make_immutable();
 
     my $cfg = $self->_read_config( $self->config );
+    $self->report( ReportWriter::Report->new );
     $self->_do_config($cfg);
 }
 
@@ -72,9 +92,8 @@ sub _read_config {
 }
 
 sub _do_config {
-    my ($self, $cfg) = @_;
+    my ( $self, $cfg ) = @_;
 
-    $self->report( ReportWriter::Report->new );
     $self->_rows($cfg);
     $self->_totals($cfg);
     $self->_images($cfg);
@@ -96,9 +115,9 @@ sub _totals {
     for my $total ( @{ $config->{totals} } ) {
         my @columns;
         for my $row ( @{ $self->report->rows } ) {
-            push @columns, grep {@{ $total->{column_names} } ~~ $_->name } @{ $row->columns };
+            push @columns, grep { @{ $total->{column_names} } ~~ $_->name } @{ $row->columns };
         }
-        my $reporttotal = ReportWriter::Total->new(_params($total, qw/name height/) );
+        my $reporttotal = ReportWriter::Total->new( _params( $total, qw/name height/ ) );
         $reporttotal->add_columns(@columns);
         $self->report->add_totals($reporttotal);
     }
@@ -119,8 +138,8 @@ sub _rows {
 ## This works for page (body) type reports only ##
         $row->{startx} ||= $config->{body}{startx};
         $row->{starty} ||= $config->{body}{starty};
-        my $reportrow = ReportWriter::Row->new( _params($row, qw/name/) );
-        $reportrow->add_columns( map { $self->_column($_) } @{ $row->{columns} } );
+        my $reportrow = ReportWriter::Row->new( _params( $row, qw/name/ ) );
+        $reportrow->add_columns( map { $self->_column($_,) } @{ $row->{columns} } );
         $self->report->add_rows($reportrow);
     }
 
@@ -165,7 +184,7 @@ sub _column {
     $column->{width} = $column->{width} * $self->{unit} if $column->{width} and $self->{unit};
 =cut
 
-    return ReportWriter::Column->new(_params($column, qw/name width align text/) );
+    return ReportWriter::Column->new( _params( $column, qw/name width align text/ ) );
 }
 
 =head2 _image
@@ -180,7 +199,7 @@ sub _images {
     return undef unless $config->{images};
 
     for my $image ( @{ $config->{images} } ) {
-        my $reportimage = ReportWriter::Image->new( _params($image, qw/startx starty width height scale filename/) );
+        my $reportimage = ReportWriter::Image->new( _params( $image, qw/startx starty width height scale filename/ ) );
         $self->report->add_images($reportimage);
     }
 
@@ -199,7 +218,7 @@ sub _boxes {
     return undef unless $config->{boxes};
 
     for my $box ( @{ $config->{boxes} } ) {
-        my $reportbox = ReportWriter::Box->new( _params($box, qw/startx starty width height fill type thickness/) );
+        my $reportbox = ReportWriter::Box->new( _params( $box, qw/startx starty width height fill type thickness/ ) );
         $self->report->add_boxes($reportbox);
     }
 
@@ -213,8 +232,8 @@ Takes a config hashref and a list of names and returns a hash with the defined v
 =cut
 
 sub _params {
-    my ($hashref, @names) = @_;
-    return map { $_ => $hashref->{$_} } grep {defined $hashref->{$_}} @names;
+    my ( $hashref, @names ) = @_;
+    return map { $_ => $hashref->{$_} } grep { defined $hashref->{$_} } @names;
 }
 
 no Moose;
