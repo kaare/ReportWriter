@@ -8,6 +8,11 @@ has 'name' => (
     isa => 'Str',
     is  => 'rw',
 );
+has 'startx' => (
+    isa     => 'Num',
+    is      => 'ro',
+    default => 0,
+);
 has 'width' => (
     isa     => 'Num',
     is      => 'ro',
@@ -34,6 +39,7 @@ after 'add_columns' => sub {
 
     # Do what's necessary to make a column work in a row environment
     # i.e. tell it where to start, end etc.
+    $self->{width} = $self->startx;
     for my $column (@columns) {
         $column->startx( $self->width );
         $column->endx( $column->startx + $column->width );

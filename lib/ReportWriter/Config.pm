@@ -138,7 +138,7 @@ sub _rows {
 ## This works for page (body) type reports only ##
         $row->{startx} ||= $config->{body}{startx};
         $row->{starty} ||= $config->{body}{starty};
-        my $reportrow = ReportWriter::Row->new( _params( $row, qw/name/ ) );
+        my $reportrow = ReportWriter::Row->new( _params( $row, qw/name startx/ ) );
         $reportrow->add_columns( map { $self->_column($_,) } @{ $row->{columns} } );
         $self->report->add_rows($reportrow);
     }

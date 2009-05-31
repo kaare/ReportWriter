@@ -8,22 +8,22 @@ rows:
       text: $name
       label: Name
     - name: description
-      width: 100
+      width: 80
       label: Description
     - name: price
       width: 25
       align: right
       label: Price
     - name: weight
-      width: 25
+      width: 20
       align: right
       label: Weight
     - name: quantity
-      width: 25
+      width: 20
       align: right
       label: Qty
     - name: size
-      width: 25
+      width: 20
       label: Size
 totals:
   - name: product_group

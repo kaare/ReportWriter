@@ -25,7 +25,6 @@ around 'ypos' => sub {
     $ypos = $self->$orig();
     return unless defined $ypos;
     my $paperheight = $self->report->page->height;
-say STDERR "$paperheight - $ypos";
     return $paperheight - $ypos;
 };
 
@@ -59,11 +58,13 @@ sub out_text {
     my $pdf = $self->pdf;
     $pdf->set_font($config->fontface);
     $pdf->size($config->fontsize);
+
+    my $startx = $config->align eq 'right' ? $config->startx + $config->width : $config->startx;
 ## Refactor PDF Report API
 # Calculate height as ypos - page end
 # lead is row height
 ##
-    my ($new_xpos, $new_ypos) = $pdf->add_paragraph($text, $config->startx, $self->ypos, $config->width, $config->height, 0, $config->height, $config->align);
+    my ($new_xpos, $new_ypos) = $pdf->add_paragraph($text, $startx, $self->ypos, $config->width, $config->height, 0, $config->height, $config->align);
 
 =pod
  Here we have to decide if add_paragraph writes more than one row. Or else we have 
