@@ -236,7 +236,6 @@ sub add_paragraph {
     $txt->fillcolor($textcolor);
     $txt->lead($lead);    # Line spacing
     $txt->translate( $hPos, $vPos );
-    $width *= .9 if $width > 200;    ## Seems PDF::API2 doesn't fully honor spillover after all
     $txt->section( $text, $width, $height, -align => $align );
 
     return $txt->textpos;
