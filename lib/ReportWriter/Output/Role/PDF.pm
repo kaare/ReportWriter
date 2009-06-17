@@ -110,6 +110,13 @@ sub body {
     return;
 }
 
+sub footer{
+    my ( $self ) = @_;
+    my $footer = $self->report->footer;
+    $self->container($_) for @{$footer->containers};
+    return;
+}
+
 sub page_images {
     my ($self) = @_;
 
@@ -156,6 +163,7 @@ sub field {
 sub result {
     my ($self) = @_;
 
+    $self->finish_page;
     return $self->pdf->finish_report('none');
 }
 

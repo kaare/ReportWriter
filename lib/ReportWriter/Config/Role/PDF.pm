@@ -93,6 +93,14 @@ before '_header' => sub {
     }
 };
 
+before '_footer' => sub {
+    my ( $self, $config ) = @_;
+    for my $key (keys %{$config->{footer} }) {
+        $config->{footer}{$key}{startx} *= $self->conversion;
+        $config->{footer}{$key}{starty} *= $self->conversion;
+    }
+};
+
 after '_page' => sub {
     my ($self, $config) = @_;
     $self->report->page->width($self->report->page->width * $self->conversion);

@@ -49,8 +49,19 @@ sub column {
 
 sub check_page {
     my ($self) = @_;
-    $self->page if $self->ypos < $self->report->page->height - ($self->report->body->starty + $self->report->body->height);
+    $self->change_page if $self->ypos < $self->report->page->height - ($self->report->body->starty + $self->report->body->height);
     return;
+}
+
+sub change_page {
+    my ($self) = @_;
+    $self->finish_page;
+    $self->page;
+}
+
+sub finish_page {
+    my ($self) = @_;
+    $self->footer;
 }
 
 ## obsolete. remove when body invocation is in place
@@ -67,12 +78,11 @@ sub headers {
 
 sub footers {
     my ($self) = @_;
-    ##
-    $self->footer($self->{outclass}->{page}->{footer}->{$_}) for keys %{ $self->{outclass}->{page}->{footer} };
+    $self->footer($_) for @{ $self->report->footer->containers };
 
     return;
 }
-
+## End of obsoletion remark
 no Moose::Role;
 
 1;
