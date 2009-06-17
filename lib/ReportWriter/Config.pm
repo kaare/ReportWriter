@@ -70,7 +70,6 @@ sub BUILD {
     __PACKAGE__->meta->make_immutable();
 
     my $cfg = $self->_read_config( $self->config );
-use Data::Dumper;say STDERR Dumper $cfg;
     $self->report( ReportWriter::Report->new );
     $self->_do_config($cfg);
 }
@@ -189,7 +188,7 @@ sub _column {
     return ReportWriter::Column->new( _params( $column, qw/name width align text/ ) );
 }
 
-=head2 _image
+=head2 _images
 
 Images
 

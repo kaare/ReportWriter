@@ -49,6 +49,13 @@ around '_column' => sub {
     return $col;
 };
 
+before '_images' => sub {
+    my ( $self, $config ) = @_;
+    return undef unless $config->{images};
+
+    map {$_->{startx} *= $self->conversion;$_->{starty} *= $self->conversion;} @{ $config->{images} };
+};
+
 before '_do_config' => sub {
     my ($self, $cfg) = @_;
     $self->defaultfield(ReportWriter::Field->new);
@@ -81,7 +88,7 @@ before '_header' => sub {
     for my $key (keys %{$config->{header} }) {
         $config->{header}{$key}{startx} *= $self->conversion;
         $config->{header}{$key}{starty} *= $self->conversion;
-        $config->{header}{$key}{width}  *= $self->conversion;
+#        $config->{header}{$key}{width}  *= $self->conversion;
 #        $config->{header}{$key}{height} *= $self->conversion;
     }
 };
