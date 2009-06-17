@@ -3,6 +3,11 @@ package ReportWriter::Config::Role::PDF;
 use 5.010;
 use Moose::Role;
 
+has 'defaultfield' => (
+    isa => 'ReportWriter::Field',
+    is  => 'rw',
+);
+
 # Some default constants
 use constant FONTFACE => 'Helvetica';
 use constant FONTSIZE => 10;
@@ -19,16 +24,15 @@ PDF related config stuff here
 
 =cut
 
-around '_containerfield' => sub {
-    my ($orig, $self, $field, $container, $startx, $starty) = @_;
+before '_containerfield' => sub {
+    my ($self, $field, $container, $startx, $starty) = @_;
 
     # Provide some reasonable defaults for PDF
-    $field->{fontface} ||= FONTFACE;
-    $field->{fontsize} ||= FONTSIZE;
+    $field->{fontface} ||= $self->defaultfield->fontface || FONTFACE;
+    $field->{fontsize} ||= $self->defaultfield->fontsize ||FONTSIZE;
     $field->{height}   ||= $field->{fontsize} * LEAD;
-    $field->{width}    ||= WIDTH;
+    $field->{width}    ||= $self->defaultfield->width || WIDTH;
     $field->{width}     *= $self->conversion;
-    return $self->$orig($field, $container, $startx, $starty);
 };
 
 around '_column' => sub {
@@ -39,18 +43,47 @@ around '_column' => sub {
     $column->{width} *= $self->conversion;
     my $col = $self->$orig($column);
     $col->fontface($self->defaultfield->fontface ? $self->defaultfield->fontface : FONTFACE);
-    $col->fontsize($self->defaultfield->fontsize ? $self->defaultfield->fontsize: FONTSIZE);
+    $col->fontsize($self->defaultfield->fontsize ? $self->defaultfield->fontsize : FONTSIZE);
     $col->height($col->fontsize * LEAD);
 
     return $col;
 };
 
+before '_do_config' => sub {
+    my ($self, $cfg) = @_;
+    $self->defaultfield(ReportWriter::Field->new);
+};
+
+before '_container' => sub {
+    my ( $self, $config ) = @_;
+    if ($config->{font}) {
+        $self->defaultfield->fontface($config->{font}{face});
+        $self->defaultfield->fontsize($config->{font}{size});
+    }
+    $self->defaultfield->width($config->{width}) if $config->{width};
+    $self->defaultfield->height($config->{height}) if $config->{height};
+};
+
 before '_body' => sub {
     my ( $self, $config ) = @_;
+    if ($config->{body}{font}) {
+        $self->defaultfield->fontface($config->{body}{font}{face});
+        $self->defaultfield->fontsize($config->{body}{font}{size});
+    }
     $config->{body}{startx} *= $self->conversion;
     $config->{body}{starty} *= $self->conversion;
     $config->{body}{width}  *= $self->conversion;
     $config->{body}{height} *= $self->conversion;
+};
+
+before '_header' => sub {
+    my ( $self, $config ) = @_;
+    for my $key (keys %{$config->{header} }) {
+        $config->{header}{$key}{startx} *= $self->conversion;
+        $config->{header}{$key}{starty} *= $self->conversion;
+        $config->{header}{$key}{width}  *= $self->conversion;
+#        $config->{header}{$key}{height} *= $self->conversion;
+    }
 };
 
 after '_page' => sub {
@@ -60,20 +93,5 @@ after '_page' => sub {
 };
 
 no Moose::Role;
-
-=head2 cheight
-
-Return converted height
-
-Returns height * conversion if unit is set 
-
-Returns height if unit is not set 
-
-=cut
-
-sub cheight {
-    my $self = shift;
-    return $self->has_unit ? $self->height * $self->conversion : $self->height;
-}
 
 1;
