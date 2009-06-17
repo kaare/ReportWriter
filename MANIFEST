@@ -27,7 +27,7 @@ lib/ReportWriter/Total.pm
 lib/ReportWriter/Types.pm
 MANIFEST			This list of files
 README
-share/layout/report.std.yml
+share/etc/report.std.yml
 t/05array.t
 t/05array.yml
 t/05arraydata
