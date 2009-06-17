@@ -23,6 +23,11 @@ has 'height' => (
     is      => 'ro',
     default => 0,
 );
+has 'spacing' => (
+    isa     => 'Num',
+    is      => 'rw',
+    default => 0,
+);
 has 'columns' => (
     metaclass => 'Collection::Array',
     is        => 'ro',
@@ -44,7 +49,7 @@ after 'add_columns' => sub {
         $column->startx( $self->width );
         $column->endx( $column->startx + $column->width );
         $self->{height} = $column->height if $column->height > $self->height;
-        $self->{width} += $column->width;
+        $self->{width} += $column->width + $self->spacing;
     }
 };
 
