@@ -12,6 +12,9 @@ TODOs
 - Make unit conversion to a role if attributes can have multiple getters.
 - End report
   Last totals need to be finished.
+- Change layout_dir to etc
+- Add a spacing option to row
+  Recalc to specific size. E.g. from mm to pt.
 
 Laters
 
