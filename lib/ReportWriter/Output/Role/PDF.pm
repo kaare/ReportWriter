@@ -97,13 +97,7 @@ sub body {
 
     my $body = $self->report->body;
 
-    my $pdf = $self->pdf;
-    $self->set_ypos($body->starty);
-    my $starty = $self->ypos;
-    $self->set_ypos($body->starty + $body->height);
-    my $endy   = $self->ypos;
-    $pdf->draw_rect($body->startx, $starty, $body->startx + $body->width, $endy) if defined $body->boxed;
-
+    $self->drawbox($body);
     $self->container($_) for @{$body->header};
     $self->set_ypos($body->starty);
     $self->increment_ypos($_->height) for @{$body->header};
@@ -141,8 +135,19 @@ sub page_graphics {
 
 sub container {
     my ( $self, $container ) = @_;
-
+    $self->drawbox($container);
     $self->field($_) for @{$container->fields};
+    return;
+}
+
+sub drawbox {
+    my ( $self, $box ) = @_;
+    my $pdf = $self->pdf;
+    $self->set_ypos($box->starty);
+    my $starty = $self->ypos;
+    $self->set_ypos($box->starty + $box->height);
+    my $endy   = $self->ypos;
+    $pdf->draw_rect($box->startx, $starty, $box->startx + $box->width, $endy) if defined $box->boxed;
     return;
 }
 

@@ -95,7 +95,7 @@ sub _footer {
 sub _container {
     my ( $self, $container ) = @_;
 
-    my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height align/) );
+    my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height align boxed/) );
     my ($startx, $starty) = ($reportcontainer->startx, $reportcontainer->starty);
     $reportcontainer->add_fields( map { $self->_containerfield($_, $reportcontainer, \$startx, \$starty) } @{ $container->{fields} } );
     return $reportcontainer;
@@ -112,7 +112,7 @@ Warning! startx and starty are being modified here
 sub _containerfield {
     my ( $self, $field, $container, $startx, $starty ) = @_;
 
-    my %params = _params($field, qw/label fontface fontsize align text width/);
+    my %params = _params($field, qw/label fontface fontsize align text width height/);
     $params{direction} ||= $container->direction;
     $params{width} ||= $container->width;
     $params{startx} = $$startx;
