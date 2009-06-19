@@ -99,7 +99,7 @@ sub body {
 
     $self->drawbox($body);
     $self->container($_) for @{$body->header};
-    $self->set_ypos($body->starty);
+#    $self->set_ypos($body->starty);
     $self->increment_ypos($_->height) for @{$body->header};
     return;
 }

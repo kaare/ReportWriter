@@ -95,7 +95,7 @@ sub _footer {
 sub _container {
     my ( $self, $container ) = @_;
 
-    my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height align boxed/) );
+    my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height align boxed spacing/) );
     my ($startx, $starty) = ($reportcontainer->startx, $reportcontainer->starty);
     $reportcontainer->add_fields( map { $self->_containerfield($_, $reportcontainer, \$startx, \$starty) } @{ $container->{fields} } );
     return $reportcontainer;
@@ -121,7 +121,7 @@ sub _containerfield {
     if ($params{direction} eq 'vertical') {
         $$starty += $field->{height}
     } else {
-        $$startx += $field->{width};
+        $$startx += $field->{width} + $container->spacing;
     }
     return $containerfield;
 }
@@ -170,14 +170,15 @@ sub _body {
 sub _bodyheader {
     my ( $self, $header, $body, $config ) = @_;
 
-    my $slice;
     @{ $header}{qw/startx starty width/} = @{ $body}{qw/startx starty width/};
     $header->{height} = 12; ## Find some meaningful value, plz ##
     $header->{direction} = 'horizontal';
+    $header->{starty} += $header->{height};
     # Header labels points to the wanted row
     my ($row) = grep {$_->{name} eq $header->{labels}} @{ $config->{rows} };
     my @fields = map { { fontface => $header->{font}{face}, fontsize => $header->{font}{size}, text => $_->{label}, width => $_->{width}, align => $_->{align} } } @{ $row->{columns} };
-    $header->{fields} = [ @fields ]; 
+    $header->{fields} = [ @fields ];
+    $header->{spacing} = $row->{spacing} || 0;
     return $self->_container($header)
 }
 

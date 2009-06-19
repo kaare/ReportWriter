@@ -10,6 +10,11 @@ has 'boxed' => (
     isa     => 'boxtype',
     is      => 'rw',
 );
+has 'spacing' => (
+    isa     => 'Num',
+    is      => 'rw',
+    default => 0,
+);
 has 'fields' => (
     metaclass => 'Collection::Array',
     is        => 'ro',
@@ -31,8 +36,6 @@ after 'add_fields' => sub {
 
     if ( $self->direction eq 'horizontal' ) {
         for my $field (@fields) {
-use Data::Dumper;
-say STDERR Dumper $field;
             $self->{height} = $field->height if $field->height > $self->height;
             $self->{width} += $field->width;
         }
