@@ -13,6 +13,7 @@ use constant FONTFACE => 'Helvetica';
 use constant FONTSIZE => 10;
 use constant LEAD     => 1.2;
 use constant WIDTH    => 50;
+use constant SPACING  => 4;
 
 with 'ReportWriter::Config::Role::Page';
 
@@ -61,14 +62,19 @@ before '_do_config' => sub {
     $self->defaultfield(ReportWriter::Field->new);
 };
 
-before '_container' => sub {
-    my ( $self, $config ) = @_;
+around '_container' => sub {
+    my ( $orig, $self, $config ) = @_;
     if ($config->{font}) {
         $self->defaultfield->fontface($config->{font}{face});
         $self->defaultfield->fontsize($config->{font}{size});
     }
     $self->defaultfield->width($config->{width}) if $config->{width};
     $self->defaultfield->height($config->{height}) if $config->{height};
+    my $reportcontainer = $self->$orig($config);
+    my $displacement = $reportcontainer->height + SPACING;
+    $reportcontainer->height($reportcontainer->height + SPACING * 2);
+    $reportcontainer->starty($reportcontainer->starty-$displacement);
+    return $reportcontainer;
 };
 
 before '_body' => sub {
