@@ -63,7 +63,7 @@ sub total_var {
 sub text {
     my ( $self, $text ) = @_;
     ## Translation of totals can possibly be provided later. See translations.t
-    ## $self->template->{TOTAL} = $self->breaks;
+    $self->template->{TOTAL} = $self->breaks;
     return scalar $self->template->($text);
 }
 
