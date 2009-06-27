@@ -15,9 +15,13 @@ TODOs
 - Change layout_dir to etc
 - Add a spacing option to row
   Recalc to specific size. E.g. from mm to pt.
+- Fix row spacing (ypos) when column spans more rows.
 
 Laters
 
+- Container labels
+  Justify height, width accordingly
+- Field layout (e.g. sprintf style)
 - Move header, footer, body into page section. Both yml and Config.pm
 - Consider ditto re images, boxes
 - Locale
