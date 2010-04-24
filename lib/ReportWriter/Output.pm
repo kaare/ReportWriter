@@ -4,12 +4,10 @@ use 5.010;
 use Moose;
 use ReportWriter::Types;
 
+with 'MooseX::Traits';
+
 has 'filename' => (
     isa => 'Str',
-    is  => 'rw',
-);
-has 'report' => (
-    isa => 'ReportWriter::Report',
     is  => 'rw',
 );
 has 'root' => (
@@ -22,11 +20,10 @@ has 'type' => (
     isa => 'report_type',
     is  => 'rw',
 );
-
-sub BUILD {
-    my $self = shift;
-    with 'ReportWriter::Output::Role::' . $self->type;
-}
+has 'report' => (
+    isa => 'ReportWriter::Report',
+    is  => 'rw',
+);
 
 =head2 row
 

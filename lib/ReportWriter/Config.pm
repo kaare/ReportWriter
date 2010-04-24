@@ -22,6 +22,8 @@ use ReportWriter::Row;
 use ReportWriter::Total;
 use ReportWriter::Types;
 
+with 'MooseX::Traits';
+
 has 'config' => (
     isa => 'Str',
     is  => 'rw',
@@ -65,10 +67,6 @@ has 'root' => (
 
 sub BUILD {
     my $self = shift;
-
-    with 'ReportWriter::Config::Role::' . $self->type;
-    __PACKAGE__->meta->make_immutable();
-
     my $cfg = $self->_read_config( $self->config );
     $self->report( ReportWriter::Report->new );
     $self->_do_config($cfg);
@@ -237,6 +235,7 @@ sub _params {
     return map { $_ => $hashref->{$_} } grep { defined $hashref->{$_} } @names;
 }
 
+__PACKAGE__->meta->make_immutable();
 no Moose;
 
 1;

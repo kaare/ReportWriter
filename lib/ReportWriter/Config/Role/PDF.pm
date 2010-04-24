@@ -92,6 +92,8 @@ before '_body' => sub {
 before '_header' => sub {
     my ( $self, $config ) = @_;
     for my $key (keys %{$config->{header} }) {
+    	$config->{header}{$key}{startx} ||= 0;
+    	$config->{header}{$key}{starty} ||= 0;
         $config->{header}{$key}{startx} *= $self->conversion;
         $config->{header}{$key}{starty} *= $self->conversion;
 #        $config->{header}{$key}{width}  *= $self->conversion;

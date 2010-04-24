@@ -20,10 +20,6 @@ around '_do_config' => sub {
         $self->_header($page);
         $self->_footer($page);
     }
-##
-    # use Data::Dumper;
-    # say STDERR Dumper $cfg, $self->report;
-##
 };
 
 =head2 _page

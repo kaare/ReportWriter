@@ -67,12 +67,10 @@ sub finish_page {
 ## obsolete. remove when body invocation is in place
 sub headers {
     my ($self) = @_;
-
     $self->header($_) for @{ $self->report->header->containers };
 ## body related issues should be in their own method(_modifyer)
 #    $self->begin_body($self->{outclass}->{body}); ## Either do as after 'headers' or as before 'body'
 #    $self->body_header($self->{outclass}->{body}->{header}->{$_}) for keys %{ $self->{outclass}->{body}->{header} };
-
     return;
 }
 

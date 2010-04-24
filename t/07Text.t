@@ -5,8 +5,7 @@ use warnings;
 use Test::More;
 use DBI;
 use File::Slurp;
-use ReportWriter::Config;
-use ReportWriter::Output;
+use ReportWriter;
 
 
 BEGIN {
@@ -24,13 +23,13 @@ my $dbh = DBI->connect("dbi:SQLite:$db_file") or die $DBI::errstr;
 my ($config, $expected);
 eval `cat t/07Textdata` or die "Can't find t/07Textdata: $!"; 
 
-ok(my $repconf = ReportWriter::Config->new(config => 't/07Text.yml', type => 'PDF'), 'New ReportWriter::Config');
-is_deeply($repconf->report->totals, $config, 'Config is OK');
+ok(my $report = ReportWriter->new(config_file => 't/07Text.yml', type => 'PDF', filename => '/tmp/a.pdf'), 'New ReportWriter::Config');
+is_deeply($report->config->report, $config, 'Config is OK');
 
 my $sql = 'SELECT * FROM product JOIN inventory USING (name) ORDER BY product_group';
 ok(my $products = $dbh->selectall_arrayref($sql, { Slice => {} }),'Select all products w/inventory');
 
-ok(my $output = ReportWriter::Output->new(report => $repconf->report, type => 'PDF', filename => '/tmp/a.pdf'), 'New ReportWriter');
+ok(my $output = $report->output, 'New ReportWriter');
 $output->page_data({ invoicenr => 123456 });
 $output->row($_) for @{ $products };
 ok(my $result = $output->result(),'Get result');

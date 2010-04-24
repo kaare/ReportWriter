@@ -23,14 +23,13 @@ with qw(
 around 'ypos' => sub {
     my ($orig, $self, $ypos) = @_;
     $ypos = $self->$orig();
-    return unless defined $ypos;
+    return unless $ypos;
     my $paperheight = $self->report->page->height;
     return $paperheight - $ypos;
 };
 
 sub _build_pdf {
     my $self = shift;
-
     # Set unit for report
     return ReportWriter::Output::Report::PDF->new(
         filename        => $self->filename,
@@ -46,7 +45,6 @@ after 'reportrow' => sub {
 
 sub out_text {
     my ( $self, $text, $config ) = @_;
-
     return unless defined $text;
     #    my $trans = $self->{outclass}->{translation}; ## Translation as role
     #    $text = $trans->text($text);
@@ -86,7 +84,7 @@ sub page {
 
 sub header {
     my ( $self ) = @_;
-
+#    return unless $self->report->header;
     my $header = $self->report->header;
     $self->container($_) for @{$header->containers};
     return;
