@@ -15,6 +15,7 @@ my $build = Module::Build->new(
         'File::ShareDir'      => '1.00',
         'Hash::Merge'         => '0.10',
         'Moose'               => '0.64',
+        'MooseX::Traits'      => '0.09',
         'Paper::Specs'        => '0.10',
         'String::Interpolate' => '0.30',
         'YAML::Tiny'          => '1.32',
