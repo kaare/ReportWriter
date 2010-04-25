@@ -34,17 +34,34 @@ has 'output' => (
 	builder => '_build_output',
 	init_arg   => undef,
 );
+has 'root' => (
+    isa     => 'Str',
+    is      => 'rw',
+    default => sub {
+        return -d 'share/etc/' ? 'share/' : dist_dir('ReportWriter');
+    },
+    lazy => 1,
+);
 
 sub _build_config {
 	my $self = shift;
     my $role = 'ReportWriter::Config::Role::' . $self->type;
-	$self->{config} = ReportWriter::Config->with_traits($role)->new(config => $self->config_file, type => $self->type);
+	$self->{config} = ReportWriter::Config->with_traits($role)->new(
+		config => $self->config_file,
+		type => $self->type,
+		root => $self->root,
+	);
 }
 
 sub _build_output {
 	my $self = shift;
     my $role = 'ReportWriter::Output::Role::' . $self->type;
-	$self->{output} = ReportWriter::Output->with_traits($role)->new(filename => $self->filename, report => $self->config->report, type => $self->type);
+	$self->{output} = ReportWriter::Output->with_traits($role)->new(
+		filename => $self->filename,
+		report => $self->config->report,
+		type => $self->type,
+		root => $self->root,
+	);
 }
 
 1;
