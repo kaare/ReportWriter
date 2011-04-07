@@ -65,3 +65,4 @@ sub _build_output {
 }
 
 1;
+# ABSTRACT: Generic Report Writer.

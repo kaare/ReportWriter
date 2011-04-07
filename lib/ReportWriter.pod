@@ -1,3 +1,4 @@
+# PODNAME: ReportWriter
 =head1 NAME
 
 ReportWriter - Reporting with Perl Moose
