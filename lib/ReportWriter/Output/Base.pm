@@ -1,7 +1,7 @@
 package ReportWriter::Output::Base;
 
 use 5.010;
-use Moose;
+use Moose::Role;
 
 requires qw(row report);
 
