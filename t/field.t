@@ -11,6 +11,6 @@ eval { $field->align('wrong') };
 ok( $@, 'Change alignment wrong dies' );
 is( $field->align, 'right', 'Check if align enum is still correct' );
 ok($field->width(25), 'Set width');
-is ($field->cwidth, 25, 'Check cwidth is the same as width');
+is ($field->width, 25, 'Check cwidth is the same as width');
 ok($field->unit('pt'), 'Set resulting unit to pt');
 is($field->cwidth, 70.86615725,'Check that cwidth is converted')
