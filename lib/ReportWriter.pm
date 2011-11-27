@@ -6,6 +6,8 @@ use Moose;
 use ReportWriter::Config;
 use ReportWriter::Output;
 
+# ABSTRACT: Generic reportwriter
+
 our $VERSION   = '0.01';
 
 has 'config_file' => (
@@ -66,3 +68,64 @@ sub _build_output {
 
 1;
 # ABSTRACT: Generic Report Writer.
+__END__
+=head1 NAME
+
+ReportWriter - Reporting with Perl Moose
+
+=head1 SYNOPSIS
+
+xyzzy
+
+=head1 DESCRIPTION
+
+Yada yada
+
+Things to fear:
+
+=over 4
+
+=item Beasts
+
+=item Witches
+
+=item Ex wifes
+
+=back
+
+Though last two items are more or less the same
+
+=head2 Substitions
+
+=over 4
+
+=item ROW
+
+=item PAGE
+
+=item TOTAL
+
+=item VAR
+
+=back
+
+=head1 METHODS
+
+Methods found in this manual page are shared by the end-user modules,
+and should not be used directly: objects of type C<ReportWriter> do not
+exist!
+
+=head2 Constructors
+
+
+=head1 DETAILS
+
+=head1 SEE ALSO
+
+=head1 LICENSE
+
+Copyright 2009 by Kaare Rasmussen.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+See F<http://www.perl.com/perl/misc/Artistic.html>
