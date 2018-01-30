@@ -90,8 +90,7 @@ sub _footer {
 
 sub _container {
     my ( $self, $container ) = @_;
-
-    my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height align boxed spacing/) );
+    my $reportcontainer = ReportWriter::Container->new(  _params($container, qw/direction startx starty width height align boxed spacing padding/) );
     my ($startx, $starty) = ($reportcontainer->startx, $reportcontainer->starty);
     $reportcontainer->add_fields( map { $self->_containerfield($_, $reportcontainer, \$startx, \$starty) } @{ $container->{fields} } );
     return $reportcontainer;
@@ -110,8 +109,8 @@ sub _containerfield {
 
     my %params = _params($field, qw/label fontface fontsize align text width height/);
     $params{direction} ||= $container->direction;
-    $params{width} ||= $container->width;
-    $params{startx} = $$startx;
+    $params{width} ||= $container->width - $container->padding * 2;
+    $params{startx} = $$startx + $container->padding;
     $params{starty} = $$starty;
     my $containerfield = ReportWriter::Containerfield->new( %params );
     if ($params{direction} eq 'vertical') {

@@ -2,18 +2,17 @@ package ReportWriter::Output::Role::Totals;
 
 use 5.010;
 use Moose::Role;
-use MooseX::AttributeHelpers;
 
 has 'breaks' => (
-    metaclass => 'Collection::Hash',
+    traits    => [ 'Hash' ],
     is        => 'rw',
     isa       => 'HashRef[HashRef]',
     default   => sub { {} },
-    provides  => {
-        exists => 'exists_in_breaks',
-        keys   => 'ids_in_breaks',
-        get    => 'get_break',
-        set    => 'set_break',
+    handles  => {
+        exists_in_breaks => 'exists',
+        ids_in_breaks  => 'keys',
+        get_break      => 'get',
+        set_break      => 'set',
     },
     lazy => 1,
 );

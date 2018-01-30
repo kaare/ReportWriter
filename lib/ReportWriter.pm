@@ -3,6 +3,8 @@ package ReportWriter;
 use 5.010;
 use Moose;
 
+use File::ShareDir qw/dist_dir/;
+
 use ReportWriter::Config;
 use ReportWriter::Output;
 
@@ -48,22 +50,24 @@ has 'root' => (
 sub _build_config {
 	my $self = shift;
     my $role = 'ReportWriter::Config::Role::' . $self->type;
-	$self->{config} = ReportWriter::Config->with_traits($role)->new(
+	my $config = ReportWriter::Config->with_traits($role)->new(
 		config => $self->config_file,
 		type => $self->type,
 		root => $self->root,
 	);
+	return $config
 }
 
 sub _build_output {
 	my $self = shift;
     my $role = 'ReportWriter::Output::Role::' . $self->type;
-	$self->{output} = ReportWriter::Output->with_traits($role)->new(
+	my $output = ReportWriter::Output->with_traits($role)->new(
 		filename => $self->filename,
 		report => $self->config->report,
 		type => $self->type,
 		root => $self->root,
 	);
+	return $output;
 }
 
 1;

@@ -2,16 +2,15 @@ package ReportWriter::Header;
 
 use 5.010;
 use Moose;
-use MooseX::AttributeHelpers;
 
 has 'containers' => (
-    metaclass => 'Collection::Array',
+    traits => ['Array'],
     is        => 'ro',
     isa       => 'ArrayRef[ReportWriter::Container]',
     default   => sub { [] },
-    provides  => {
-        'push' => 'add_containers',
-        'pop'  => 'remove_last_container',
+    handles  => {
+        add_containers      => 'push',
+        remove_last_container => 'pop',
     }
 );
 

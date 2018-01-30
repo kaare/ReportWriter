@@ -2,7 +2,6 @@ package ReportWriter::Row;
 
 use 5.010;
 use Moose;
-use MooseX::AttributeHelpers;
 
 has 'name' => (
     isa => 'Str',
@@ -29,13 +28,13 @@ has 'spacing' => (
     default => 0,
 );
 has 'columns' => (
-    metaclass => 'Collection::Array',
+    traits => ['Array'],
     is        => 'ro',
     isa       => 'ArrayRef[ReportWriter::Column]',
     default   => sub { [] },
-    provides  => {
-        'push' => 'add_columns',
-        'pop'  => 'remove_last_column',
+    handles  => {
+        add_columns      => 'push',
+        remove_last_column => 'pop',
     }
 );
 

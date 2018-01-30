@@ -2,10 +2,10 @@ package ReportWriter::Container;
 
 use 5.010;
 use Moose;
-use MooseX::AttributeHelpers;
 use ReportWriter::Types;
 
 with 'ReportWriter::Role::Position';
+
 has 'boxed' => (
     isa     => 'boxtype',
     is      => 'rw',
@@ -15,14 +15,19 @@ has 'spacing' => (
     is      => 'rw',
     default => 0,
 );
+has 'padding' => (
+    isa     => 'Num',
+    is      => 'rw',
+    default => 10,
+);
 has 'fields' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is        => 'ro',
     isa       => 'ArrayRef[ReportWriter::Containerfield]',
     default   => sub { [] },
-    provides  => {
-        'push' => 'add_fields',
-        'pop'  => 'remove_last_field',
+    handles  => {
+        add_fields      => 'push',
+        remove_last_field => 'pop',
     }
 );
 has 'direction' => (

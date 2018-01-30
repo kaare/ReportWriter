@@ -214,7 +214,6 @@ sub add_img {
     my $sub = "image_$type{$ext}";
     my $img = $self->{pdf}->$sub($file);
     my $gfx = $self->{page}->gfx;
-
     $gfx->image( $img, $x, $y, $scale );
 }
 

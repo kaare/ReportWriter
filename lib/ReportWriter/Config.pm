@@ -81,7 +81,10 @@ Find yml in local dir first, then dist dir
 sub _read_config {
     my ( $self, $filename, @processed ) = @_;
 
-    my $yaml = YAML::Tiny->read($filename) || YAML::Tiny->read( $self->root . '/etc/' . $filename );
+    my $yaml;
+	eval { $yaml = YAML::Tiny->read($filename) };
+	$yaml = YAML::Tiny->read( $self->root . $filename ) if $@;
+
     push @processed, $filename;
     my $config = $yaml->[0];
     $config = merge( $config, $self->_read_config( $config->{layout}, @processed ) )

@@ -2,7 +2,6 @@ package ReportWriter::Report;
 
 use 5.010;
 use Moose;
-use MooseX::AttributeHelpers;
 use ReportWriter::Types;
 
 has 'unit' => (
@@ -11,43 +10,43 @@ has 'unit' => (
     predicate => 'has_unit',
 );
 has 'rows' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is        => 'ro',
     isa       => 'ArrayRef[ReportWriter::Row]',
     default   => sub { [] },
-    provides  => {
-        'push' => 'add_rows',
-        'pop'  => 'remove_last_row',
+    handles  => {
+        add_rows      => 'push',
+        remove_last_row => 'pop',
     }
 );
 has 'totals' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is        => 'ro',
     isa       => 'ArrayRef[ReportWriter::Total]',
     default   => sub { [] },
-    provides  => {
-        'push' => 'add_totals',
-        'pop'  => 'remove_last_total',
+    handles  => {
+        add_totals      => 'push',
+        remove_last_total => 'pop',
     }
 );
 has 'images' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is        => 'ro',
     isa       => 'ArrayRef[ReportWriter::Image]',
     default   => sub { [] },
-    provides  => {
-        'push' => 'add_images',
-        'pop'  => 'remove_last_image',
+    handles  => {
+        add_images      => 'push',
+        remove_last_image => 'pop',
     }
 );
 has 'boxes' => (
-    metaclass => 'Collection::Array',
+    traits => [ 'Array' ],
     is        => 'ro',
     isa       => 'ArrayRef[ReportWriter::Box]',
     default   => sub { [] },
-    provides  => {
-        'push' => 'add_boxes',
-        'pop'  => 'remove_last_box',
+    handles  => {
+        add_boxes     => 'push',
+        remove_last_box => 'pop',
     }
 );
 has page => (
